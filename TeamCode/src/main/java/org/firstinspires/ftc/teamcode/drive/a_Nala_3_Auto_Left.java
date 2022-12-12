@@ -19,10 +19,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Yajie_Apriltag_test")
+@Autonomous(name="a_Nala_3_Auto_Left")
 
 //@Disabled
-public class Yajie_Apriltag_test extends LinearOpMode {
+public class a_Nala_3_Auto_Left extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -34,18 +34,18 @@ public class Yajie_Apriltag_test extends LinearOpMode {
 
     // to first pole
     public static double x1 = 39.36;
-    public static double y1 = 2.5;
-    //back up to line up for pickup
-    public static double x2 = 48.5;
+    public static double y1 = 2.3;
+    //move up to line up for pickup
+    public static double x2 = 49;
     public static double y2 = 2.5;
     //cone stack location
-    public static double x3 = 48.5;
-    public static double y3 = 23;
+    public static double x3 = 49;
+    public static double y3 = 23.2;
     //backup to score
-    public static double x4 = 48.75;
+    public static double x4 = 48.5;
     public static double y4 = -11.2;
 
-    int id = 0;
+    int id = 3;
 
 
 
@@ -110,10 +110,11 @@ public class Yajie_Apriltag_test extends LinearOpMode {
 
         }
 
+
         if (opModeIsActive()) {
 
             if (id == 0)
-                parkY = 30;
+                parkY = 30.6;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
@@ -246,6 +247,9 @@ public class Yajie_Apriltag_test extends LinearOpMode {
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
+                        servo1.setPosition(0.8);
+                        servo2.setPosition(0.44);
+
                     })
                     //time to score and then swing the arm back
                     .waitSeconds(2)
@@ -256,7 +260,11 @@ public class Yajie_Apriltag_test extends LinearOpMode {
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
-
+                    .waitSeconds(1)
+                    .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
+                        servo1.setPosition(0.6);
+                        servo2.setPosition(0.6);
+                    })
                     //use the parkY variable to park in the correct zone
                     .forward(parkY)
                     .build();
