@@ -176,17 +176,17 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
             *///////////////////////////
 
             //open claw
-            if(gamepad2.left_bumper && ClawState == false) {
+            if(gamepad2.left_bumper /*&& ClawState == false*/) {
                 servo1.setPosition(sr1o);
                 servo2.setPosition(sr2o);
-                ClawState=true;
+                //ClawState=true;
             }
 
             //close claw
-            if(gamepad2.left_bumper && ClawState == true) {
+            if(gamepad2.right_bumper /*&& ClawState == true*/) {
                 servo1.setPosition(sr1c);
                 servo2.setPosition(sr2c);
-                ClawState=false;
+                //ClawState=false;
             }
 
 

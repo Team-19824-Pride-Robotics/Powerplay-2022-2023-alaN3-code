@@ -34,15 +34,15 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
 
     // to first pole
     public static double x1 = 39.36;
-    public static double y1 = -.5;
+    public static double y1 = -1;
     //move up to line up for pickup
-    public static double x2 = 49;
+    public static double x2 = 50;
     public static double y2 = -2.5;
     //cone stack location
-    public static double x3 = 49;
-    public static double y3 = -23.2;
+    public static double x3 = 50;
+    public static double y3 = -22.5;
     //backup to score
-    public static double x4 = 48.5;
+    public static double x4 = 49.75;
     public static double y4 = 11.2;
 
     int id = 3;
@@ -138,7 +138,7 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(.06);
+                        servo3.setPosition(.73);
                     })
 
                     //time for the arm to stop swinging
@@ -169,7 +169,7 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
                     .lineTo(new Vector2d(x3,y3))
 
                     //grab top cone and then raise the elevator up before backing away
-                    .UNSTABLE_addTemporalMarkerOffset(-0.5    , () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-0.25    , () -> {
                         servo1.setPosition(0.8);
                         servo2.setPosition(0.44);
                     })
