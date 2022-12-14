@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -38,6 +39,11 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
     public static double downToScore = 150;
     public static double bumpUpElevator = 150;
     public boolean ClawState = true;
+    int temp = 1;
+
+    RevBlinkinLedDriver lights;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
+
 
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
@@ -55,6 +61,10 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
         servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
 
+        lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+        lights.setPattern(pattern);
+
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -64,6 +74,19 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
 
         while (!isStopRequested()) {
 
+            // telemetry
+            Pose2d poseEstimate = drive.getPoseEstimate();
+            telemetry.addData("x", poseEstimate.getX());
+            telemetry.addData("y", poseEstimate.getY());
+            telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
+            telemetry.addData("Encoder elevator", elevator.getCurrentPosition());
+            telemetry.addData("claw1 pos",servo1.getPosition());
+            telemetry.addData("claw2 pos",servo2.getPosition());
+            telemetry.addData("arm pos",servo3.getPosition());
+            telemetry.addData("Run time",getRuntime());
+            telemetry.addData("temp",temp);
+            telemetry.update();
+            
             /*//////////////////////////
             DRIVER 1 CONTROLS START HERE
             *///////////////////////////
@@ -111,15 +134,7 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
 
             drive.update();
 
-            Pose2d poseEstimate = drive.getPoseEstimate();
-            telemetry.addData("x", poseEstimate.getX());
-            telemetry.addData("y", poseEstimate.getY());
-            telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
-            telemetry.addData("Encoder elevator", elevator.getCurrentPosition());
-            telemetry.addData("claw1 pos",servo1.getPosition());
-            telemetry.addData("claw2 pos",servo2.getPosition());
-            telemetry.addData("arm pos",servo3.getPosition());
-            telemetry.update();
+
 
             //////////////////////////////
             //Semi-autonomous routines start here
@@ -247,6 +262,21 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(elevator_strength);
             }
+
+            //timer for led
+            if(temp == 1) {
+                resetRuntime();
+                temp = 2;
+            }
+            if(time >= 90 && time <120){
+                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
+                lights.setPattern(pattern);
+            }
+            else {
+                pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+                lights.setPattern(pattern);
+            }
+
         }
     }
 }
