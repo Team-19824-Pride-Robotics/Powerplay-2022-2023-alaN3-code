@@ -45,6 +45,7 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
     RevBlinkinLedDriver.BlinkinPattern pattern;
 
 
+
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
@@ -60,15 +61,17 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
-
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
-        pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
-        lights.setPattern(pattern);
 
+
+        //reset encoder
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        //led
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+        lights.setPattern(pattern);
 
         waitForStart();
 
@@ -86,7 +89,7 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
             telemetry.addData("Run time",getRuntime());
             telemetry.addData("temp",temp);
             telemetry.update();
-            
+
             /*//////////////////////////
             DRIVER 1 CONTROLS START HERE
             *///////////////////////////
@@ -263,12 +266,16 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
                 elevator.setPower(elevator_strength);
             }
 
-            //timer for led
+            //led control
             if(temp == 1) {
                 resetRuntime();
                 temp = 2;
             }
-            if(time >= 90 && time <120){
+            if(time >= 75 && time <=80){
+                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
+                lights.setPattern(pattern);
+            }
+            if(time >= 88 && time <= 90){
                 pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
                 lights.setPattern(pattern);
             }

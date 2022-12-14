@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.drive;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,7 +46,12 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
     public static double x4 = 49.75;
     public static double y4 = 11.2;
 
+    //apriltag qr id
     int id = 3;
+
+    //led
+    RevBlinkinLedDriver lights;
+    RevBlinkinLedDriver.BlinkinPattern pattern;
 
 
 
@@ -85,11 +91,16 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
+        lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
+        //reset encoder
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        //led
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+        lights.setPattern(pattern);
 
 
 
@@ -113,6 +124,11 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
 
         if (opModeIsActive()) {
 
+            //led
+            pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+            lights.setPattern(pattern);
+
+            //apriltag
             if (id == 0)
                 parkY = 30.6;
             else if (id == 1)
