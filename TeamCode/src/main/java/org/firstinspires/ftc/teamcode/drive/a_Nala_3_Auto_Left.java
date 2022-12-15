@@ -34,8 +34,8 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
     public static double elevator_strength = 1;
 
     // to first pole
-    public static double x1 = 39.36;
-    public static double y1 = 2.3;
+    public static double x1 = 38.8;
+    public static double y1 = 2.7;
     //move up to line up for pickup
     public static double x2 = 49;
     public static double y2 = 2.5;
@@ -132,7 +132,7 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
 
             //apriltag
             if (id == 0)
-                parkY = 30.6;
+                parkY = 31;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
@@ -187,7 +187,7 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
                     .lineTo(new Vector2d(x3,y3))
 
                     //grab top cone and then raise the elevator up before backing away
-                    .UNSTABLE_addTemporalMarkerOffset(-0.5    , () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
                         servo1.setPosition(0.8);
                         servo2.setPosition(0.44);
                     })
@@ -234,7 +234,7 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
                     .lineTo(new Vector2d(x3,y3))
 
                     //grab second cone and then raise the elevator up before backing away
-                    .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
                         servo1.setPosition(0.8);
                         servo2.setPosition(0.44);
                     })

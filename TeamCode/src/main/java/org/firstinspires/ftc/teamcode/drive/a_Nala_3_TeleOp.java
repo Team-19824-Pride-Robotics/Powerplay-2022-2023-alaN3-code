@@ -271,7 +271,7 @@ public class a_Nala_3_TeleOp extends LinearOpMode {
                 resetRuntime();
                 temp = 2;
             }
-            if(time >= 75 && time <=80){
+            if(time >= 75 && time <= 77){
                 pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
                 lights.setPattern(pattern);
             }
