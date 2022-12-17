@@ -20,10 +20,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="a_Nala_3_Auto_Left")
+@Autonomous(name="Blue_Left_Nala_3_Auto")
 
 //@Disabled
-public class a_Nala_3_Auto_Left extends LinearOpMode {
+public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -101,7 +101,7 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
         lights.setPattern(pattern);
 
 
@@ -127,7 +127,7 @@ public class a_Nala_3_Auto_Left extends LinearOpMode {
         if (opModeIsActive()) {
 
             //led
-            pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+            pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
             lights.setPattern(pattern);
 
             //apriltag

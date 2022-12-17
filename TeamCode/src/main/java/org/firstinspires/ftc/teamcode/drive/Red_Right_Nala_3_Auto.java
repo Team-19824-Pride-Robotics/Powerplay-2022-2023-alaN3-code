@@ -20,10 +20,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="a_Nala_3_Auto_Right")
+@Autonomous(name="Red_Right_Nala_3_Auto")
 
 //@Disabled
-public class a_Nala_3_Auto_Right extends LinearOpMode {
+public class Red_Right_Nala_3_Auto extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -47,7 +47,7 @@ public class a_Nala_3_Auto_Right extends LinearOpMode {
     public static double y4 = 11.2;
 
     //apriltag qr id
-    int id = 3;
+    int id = 1;
 
     //led
     RevBlinkinLedDriver lights;
