@@ -30,7 +30,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     public static double armMiddle = 0.38;
     public static int topCone = -650;
     public static int secondCone = -500;
-    public static double parkY = 32;
+    public static double parkY = -13;
     public static double elevator_strength = 1;
 
     // to first pole
@@ -43,8 +43,8 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     public static double x3 = 49;
     public static double y3 = 23.2;
     //backup to score
-    public static double x4 = 48.5;
-    public static double y4 = -11.2;
+    public static double x4 = 48.75;
+    public static double y4 = -11;
 
     //april tag qr id
     int id = 3;
@@ -132,7 +132,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
             //apriltag
             if (id == 0)
-                parkY = 31;
+                parkY = 31.5;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
@@ -192,7 +192,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
                         servo2.setPosition(0.44);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-4000);
+                        elevator.setTargetPosition(-4100);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -239,7 +239,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
                         servo2.setPosition(0.44);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-4000);
+                        elevator.setTargetPosition(-4100);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -274,7 +274,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //lower the elevator to pickup position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-20);
+                        elevator.setTargetPosition(-100);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
