@@ -82,6 +82,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
+
         drive.setPoseEstimate(startPose);
 
         DcMotor elevator;
@@ -140,6 +141,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
 
+                    //.setTangent(Math.toRadians(0))
                     //close the claw
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(0.8);
@@ -147,8 +149,8 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //drive to high junction
-                    .lineTo(new Vector2d(x1,y1))
-
+                    //.lineTo(new Vector2d(x1,y1))
+                    .lineToLinearHeading(new Pose2d(x1, y1, Math.toRadians(0)))
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
                         elevator.setTargetPosition(-1850);
@@ -182,9 +184,16 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //back up, turn, and then drive to cone stack
-                    .lineTo(new Vector2d(x2,y2))
+                    //.lineTo(new Vector2d(x2,y2))
+
+                    .lineToLinearHeading(new Pose2d(x2, y2, Math.toRadians(0)))
                     .turn(Math.toRadians(90))
-                    .lineTo(new Vector2d(x3,y3))
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+
+                    //.lineTo(new Vector2d(x3,y3))
+                   // .lineToLinearHeading(new Pose2d(x3, 2, Math.toRadians(0)))
+
+                    //.splineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)), Math.toRadians(0))
 
                     //grab top cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
@@ -201,7 +210,8 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineTo(new Vector2d(x4,y4))
+                    //.lineTo(new Vector2d(x4,y4))
+                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
@@ -231,7 +241,9 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //drive back to the cone stack
-                    .lineTo(new Vector2d(x3,y3))
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+
+                    //.lineTo(new Vector2d(x3,y3))
 
                     //grab second cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
@@ -248,7 +260,8 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineTo(new Vector2d(x4,y4))
+                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
+                    //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
