@@ -18,10 +18,10 @@ public class Blue_TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
     public static double speed = 0.5;
-    public static double sr1o = 0.6;
-    public static double sr2o = 0.6;
-    public static double sr1c = 0.8;
-    public static double sr2c = 0.44;
+    public static double sr1o = 0.4;
+    //public static double sr2o = 0.6;
+    public static double sr1c = 0.58;
+    //public static double sr2c = 0.44;
     public static double al = .06;
     public static double am = 0.38;
     public static double ar = .73;
@@ -196,14 +196,14 @@ public class Blue_TeleOp_Nala_3 extends LinearOpMode {
             //open claw
             if(gamepad2.left_bumper /*&& ClawState == false*/) {
                 servo1.setPosition(sr1o);
-                servo2.setPosition(sr2o);
+                //servo2.setPosition(sr2o);
                 //ClawState=true;
             }
 
             //close claw
             if(gamepad2.right_bumper /*&& ClawState == true*/) {
                 servo1.setPosition(sr1c);
-                servo2.setPosition(sr2c);
+                //servo2.setPosition(sr2c);
                 //ClawState=false;
             }
 
