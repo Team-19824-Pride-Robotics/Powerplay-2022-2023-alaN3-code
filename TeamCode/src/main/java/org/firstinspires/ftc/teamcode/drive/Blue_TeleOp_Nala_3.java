@@ -18,16 +18,14 @@ public class Blue_TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
     public static double speed = 0.5;
-    public static double sr1o = 0.4;
-    //public static double sr2o = 0.6;
-    public static double sr1c = 0.58;
-    //public static double sr2c = 0.44;
+    public static double sr1o = 0.48;
+    public static double sr1c = 0.67;
     public static double al = .06;
     public static double am = 0.38;
     public static double ar = .73;
-    public static double top = -4000;
-    public static double mid = -2900;
-    public static double low = -1750;
+    public static double top = -2900;
+    public static double mid = -2150;
+    public static double low = -1300;
     public static double ground = -200;
     public static double pickup = -20;
     public static double x1 = 35.91;

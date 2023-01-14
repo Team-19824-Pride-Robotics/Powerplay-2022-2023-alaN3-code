@@ -46,6 +46,10 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
     public static double x4 = 49.5;
     public static double y4 = 11.2;
 
+    //claw
+    public static double sr1c = .58;
+    public static double sr1o = .4;
+
     //apriltag qr id
     int id = 1;
 
@@ -84,12 +88,10 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
         DcMotor elevator;
         Servo servo1;
-        Servo servo2;
         Servo servo3;
 
         elevator = hardwareMap.get(DcMotor.class, "elevator");
         servo1 = hardwareMap.get(Servo.class, "servo1");
-        servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
@@ -141,8 +143,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //close the claw
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
 
                     //drive to high junction
@@ -163,8 +164,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                         servo3.setPosition(armMiddle);
@@ -187,8 +187,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //grab top cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.2    , () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(-4100);
@@ -212,8 +211,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
@@ -234,8 +232,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //grab second cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(-4100);
@@ -259,14 +256,11 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
-
+                        servo1.setPosition(sr1c);
                     })
                     //time to score and then swing the arm back
                     .waitSeconds(2)
@@ -279,8 +273,7 @@ public class Red_Right_Nala_3_Auto extends LinearOpMode {
                     })
                     .waitSeconds(1)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     //use the parkY variable to park in the correct zone
                     .forward(parkY)

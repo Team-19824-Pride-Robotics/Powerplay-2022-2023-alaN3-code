@@ -28,10 +28,16 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = 0.38;
-    public static int topCone = -650;
-    public static int secondCone = -500;
+    public static int topCone = -550;
+    public static int secondCone = -400;
+    public static int thirdcone = -250;
     public static double parkY = -13;
     public static double elevator_strength = 1;
+
+    public static int top = -2900;
+    public static int mid = -2150;
+    public static int low = -1300;
+    public static int pickup = -70;
 
     // to first pole
     public static double x1 = 38.8;
@@ -41,10 +47,14 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
     public static double y2 = 2.5;
     //cone stack location
     public static double x3 = 49;
-    public static double y3 = 23.2;
+    public static double y3 = 24;
     //backup to score
     public static double x4 = 48.75;
     public static double y4 = -11;
+
+    //claw
+    public static double sr1c = .67;
+    public static double sr1o = .48;
 
     //april tag qr id
     int id = 3;
@@ -87,12 +97,10 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
         DcMotor elevator;
         Servo servo1;
-        Servo servo2;
         Servo servo3;
 
         elevator = hardwareMap.get(DcMotor.class, "elevator");
         servo1 = hardwareMap.get(Servo.class, "servo1");
-        servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
@@ -144,8 +152,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     //.setTangent(Math.toRadians(0))
                     //close the claw
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
 
                     //drive to high junction
@@ -153,7 +160,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .lineToLinearHeading(new Pose2d(x1, y1, Math.toRadians(0)))
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
-                        elevator.setTargetPosition(-1850);
+                        elevator.setTargetPosition(low);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -162,12 +169,11 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(1)
+                    .waitSeconds(.25)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                         servo3.setPosition(armMiddle);
@@ -197,11 +203,10 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
                     //grab top cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-4100);
+                        elevator.setTargetPosition(top);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -219,19 +224,18 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(1)
+                    .waitSeconds(.25)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
                     })
 
                     //time to score and then swing the arm back
-                    .waitSeconds(2)
+                    .waitSeconds(1.15)
 
                     //lower the elevator to "second cone" position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -247,11 +251,10 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
                     //grab second cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-4100);
+                        elevator.setTargetPosition(top);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -269,32 +272,74 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(2)
+                    .waitSeconds(.25)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
-
                     })
                     //time to score and then swing the arm back
-                    .waitSeconds(2)
+                    .waitSeconds(1.15)
+
+                    //lower the elevator to "second cone" position
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        elevator.setTargetPosition(thirdcone);
+                        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        elevator.setPower(elevator_strength);
+                    })
+
+                    //drive back to the cone stack
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+
+                    //.lineTo(new Vector2d(x3,y3))
+
+                    //grab second cone and then raise the elevator up before backing away
+                    .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
+                        servo1.setPosition(sr1c);
+                    })
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        elevator.setTargetPosition(top);
+                        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        elevator.setPower(elevator_strength);
+                    })
+
+                    //time to grab the cone and raise elevator
+                    .waitSeconds(0.5)
+
+                    //drive to the high junction
+                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
+                    //.lineTo(new Vector2d(x4,y4))
+
+                    //swing the arm to the right while driving
+                    .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
+                        servo3.setPosition(0.73);
+                    })
+
+                    //time for the arm to stop swinging
+                    .waitSeconds(.25)
+
+                    //open claw and swing arm back to middle
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        servo1.setPosition(sr1o);
+                    })
+                    .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                        servo3.setPosition(armMiddle);
+                    })
+                    //time to score and then swing the arm back
+                    .waitSeconds(1.15)
 
                     //lower the elevator to pickup position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(-100);
+                        elevator.setTargetPosition(pickup);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
                     .waitSeconds(1)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     //use the parkY variable to park in the correct zone
                     .forward(parkY)

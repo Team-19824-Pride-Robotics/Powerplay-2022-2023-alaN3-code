@@ -46,6 +46,10 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     public static double x4 = 48.75;
     public static double y4 = -11;
 
+    //claw
+    public static double sr1c = .58;
+    public static double sr1o = .4;
+
     //april tag qr id
     int id = 3;
 
@@ -142,8 +146,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //close the claw
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
 
                     //drive to high junction
@@ -164,8 +167,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                         servo3.setPosition(armMiddle);
@@ -188,8 +190,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //grab top cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(-4100);
@@ -213,8 +214,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
@@ -235,8 +235,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //grab second cone and then raise the elevator up before backing away
                     .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(-4100);
@@ -260,13 +259,11 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(1, () -> {
                         servo3.setPosition(armMiddle);
-                        servo1.setPosition(0.8);
-                        servo2.setPosition(0.44);
+                        servo1.setPosition(sr1c);
 
                     })
                     //time to score and then swing the arm back
@@ -280,8 +277,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
                     })
                     .waitSeconds(1)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        servo1.setPosition(0.6);
-                        servo2.setPosition(0.6);
+                        servo1.setPosition(sr1o);
                     })
                     //use the parkY variable to park in the correct zone
                     .forward(parkY)
