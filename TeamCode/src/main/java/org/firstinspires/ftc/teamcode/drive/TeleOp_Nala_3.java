@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @TeleOp(group = "drive")
 @Config
-public class Blue_TeleOp_Nala_3 extends LinearOpMode {
+public class TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
     public static double speed = 0.5;

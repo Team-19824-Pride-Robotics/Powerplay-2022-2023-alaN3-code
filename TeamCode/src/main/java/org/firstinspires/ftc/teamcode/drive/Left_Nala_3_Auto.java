@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -20,10 +19,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Red_Left_Nala_3_Auto")
+@Autonomous(name="Left_Nala_3_Auto")
 
 //@Disabled
-public class Red_Left_Nala_3_Auto extends LinearOpMode {
+public class Left_Nala_3_Auto extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -33,24 +32,30 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
     public static int thirdcone = -250;
     public static double parkY = -13;
     public static double elevator_strength = 1;
+    public static double al = .06;
+    public static double ar = .73;
 
+    //junction
     public static int top = -2900;
     public static int mid = -2150;
     public static int low = -1300;
     public static int pickup = -70;
 
     // to first pole
-    public static double x1 = 38.8;
-    public static double y1 = 2.7;
+    public static double x1 = 38.2;
+    public static double y1 = 3;
     //move up to line up for pickup
     public static double x2 = 49;
     public static double y2 = 2.5;
     //cone stack location
     public static double x3 = 49;
-    public static double y3 = 24;
+    public static double y3 = 23.5;
     //backup to score
     public static double x4 = 48.75;
-    public static double y4 = -11;
+    public static double y4 = -10.85;
+    //score last cone on high
+    public static double x5 = 48.75;
+    public static double y5 = -10.85;
 
     //claw
     public static double sr1c = .67;
@@ -141,7 +146,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
             //apriltag
             if (id == 0)
-                parkY = 31.5;
+                parkY = 31.8;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
@@ -149,7 +154,6 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
 
-                    //.setTangent(Math.toRadians(0))
                     //close the claw
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1c);
@@ -165,7 +169,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(.06);
+                        servo3.setPosition(al);
                     })
 
                     //time for the arm to stop swinging
@@ -175,7 +179,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
                         servo3.setPosition(armMiddle);
                     })
 
@@ -220,7 +224,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(0.73);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -230,7 +234,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(.25, () -> {
                         servo3.setPosition(armMiddle);
                     })
 
@@ -268,7 +272,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(0.73);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -278,7 +282,7 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(.25, () -> {
                         servo3.setPosition(armMiddle);
                     })
                     //time to score and then swing the arm back
@@ -310,22 +314,22 @@ public class Red_Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x5, y5, Math.toRadians(90)))
                     //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(0.73);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(.25)
+                    .waitSeconds(.3)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(1, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(.25, () -> {
                         servo3.setPosition(armMiddle);
                     })
                     //time to score and then swing the arm back
