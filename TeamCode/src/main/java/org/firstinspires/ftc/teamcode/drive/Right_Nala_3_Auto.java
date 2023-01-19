@@ -52,11 +52,11 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static double x3 = 50.75;
     public static double y3 = -23;
     //backup to score
-    public static double x4 = 49;
-    public static double y4 = 11.2;
+    public static double x4 = 50;
+    public static double y4 = 10;
     //score last cone on high
-    public static double x5 = 49;
-    public static double y5 = 11.2;
+    public static double x5 = 50;
+    public static double y5 = 10;
 
     //claw
     public static double sr1c = .67;
