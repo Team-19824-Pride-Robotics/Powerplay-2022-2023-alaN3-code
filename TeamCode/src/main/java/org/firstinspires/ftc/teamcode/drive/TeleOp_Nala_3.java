@@ -278,7 +278,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 lights.setPattern(pattern);
             }
             else {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
                 lights.setPattern(pattern);
             }
 

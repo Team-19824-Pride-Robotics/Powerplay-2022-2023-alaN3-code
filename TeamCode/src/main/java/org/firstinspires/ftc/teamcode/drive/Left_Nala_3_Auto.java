@@ -115,7 +115,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         lights.setPattern(pattern);
 
 
@@ -141,7 +141,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         if (opModeIsActive()) {
 
             //led
-            pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
+            pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
             lights.setPattern(pattern);
 
             //apriltag
