@@ -68,7 +68,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
         lights.setPattern(pattern);
 
         waitForStart();
@@ -269,16 +269,16 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 resetRuntime();
                 temp = 2;
             }
-            if(time >= 75 && time <= 77){
-                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_BLUE;
+            if(time >= 80 && time <= 82){
+                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
                 lights.setPattern(pattern);
             }
-            if(time >= 88 && time <= 90){
-                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_BLUE;
+            if(time >= 93 && time <= 95){
+                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
                 lights.setPattern(pattern);
             }
             else {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
                 lights.setPattern(pattern);
             }
 

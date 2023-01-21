@@ -20,10 +20,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Blue_Left_Nala_3_Auto")
+@Autonomous(name="Z_Backup_Right_Nala_3_Auto")
 
 //@Disabled
-public class Blue_Left_Nala_3_Auto extends LinearOpMode {
+public class Z_Backup_Right_Nala_3_Auto extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -34,28 +34,26 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     public static double elevator_strength = 1;
 
     // to first pole
-    public static double x1 = 38.8;
-    public static double y1 = 2.7;
+    public static double x1 = 38.75;
+    public static double y1 = -.8;
     //move up to line up for pickup
-    public static double x2 = 49;
-    public static double y2 = 2.5;
+    public static double x2 = 50;
+    public static double y2 = -2.5;
     //cone stack location
-    public static double x3 = 49;
-    public static double y3 = 23.2;
+    public static double x3 = 50;
+    public static double y3 = -22.5;
     //backup to score
-    public static double x4 = 48.75;
-    public static double y4 = -11;
+    public static double x4 = 49.3;
+    public static double y4 = 11.2;
 
     //claw
     public static double sr1c = .58;
     public static double sr1o = .4;
 
-    //april tag qr id
-    int id = 3;
+    //apriltag qr id
+    int id = 1;
 
     //led
-    int temp = 1;
-
     RevBlinkinLedDriver lights;
     RevBlinkinLedDriver.BlinkinPattern pattern;
 
@@ -68,7 +66,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 2"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline();
 
         camera.setPipeline(aprilTagDetectionPipeline);
@@ -90,16 +88,14 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
         DcMotor elevator;
         Servo servo1;
-        Servo servo2;
         Servo servo3;
 
         elevator = hardwareMap.get(DcMotor.class, "elevator");
         servo1 = hardwareMap.get(Servo.class, "servo1");
-        servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
-
+        //reset encoder
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -136,11 +132,11 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
             //apriltag
             if (id == 0)
-                parkY = 31.5;
+                parkY = -13;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
-                parkY = -13;
+                parkY = 31.5;
 
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
 
@@ -154,12 +150,12 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
-                        elevator.setTargetPosition(-1850);
+                        elevator.setTargetPosition(-1750);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(.06);
+                        servo3.setPosition(.73);
                     })
 
                     //time for the arm to stop swinging
@@ -185,11 +181,11 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //back up, turn, and then drive to cone stack
                     .lineTo(new Vector2d(x2,y2))
-                    .turn(Math.toRadians(90))
+                    .turn(Math.toRadians(-90))
                     .lineTo(new Vector2d(x3,y3))
 
                     //grab top cone and then raise the elevator up before backing away
-                    .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-0.2    , () -> {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -206,7 +202,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(0.73);
+                        servo3.setPosition(.06);
                     })
 
                     //time for the arm to stop swinging
@@ -251,7 +247,7 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(0.73);
+                        servo3.setPosition(.06);
                     })
 
                     //time for the arm to stop swinging
@@ -288,10 +284,6 @@ public class Blue_Left_Nala_3_Auto extends LinearOpMode {
             }
 
             PoseStorage.currentPose = drive.getPoseEstimate();
-
-
-
-
 
         }
     }
