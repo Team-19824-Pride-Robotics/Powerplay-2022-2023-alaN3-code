@@ -27,9 +27,9 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = 0.38;
-    public static int topCone = -550;
-    public static int secondCone = -400;
-    public static int thirdcone = -250;
+    public static int topCone = -575;
+    public static int secondCone = -425;
+    public static int thirdcone = -375;
     public static double parkY = -13;
     public static double elevator_strength = 1;
     public static double al = .06;
@@ -39,22 +39,22 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static int top = -2900;
     public static int mid = -2150;
     public static int low = -1300;
-    public static int pickup = -70;
+    public static int pickup = -0;
 
     // to first pole
-    public static double x1 = 38.2;
-    public static double y1 = 3;
+    public static double x1 = 38;
+    public static double y1 = 1.75;
     //move up to line up for pickup
     public static double x2 = 49;
-    public static double y2 = 2.5;
+    public static double y2 = 1.5;
     //cone stack location
     public static double x3 = 49;
-    public static double y3 = 23.5;
+    public static double y3 = 23.2;
     //backup to score
-    public static double x4 = 48.75;
+    public static double x4 = 48.8;
     public static double y4 = -10.85;
     //score last cone on high
-    public static double x5 = 48.75;
+    public static double x5 = 49;
     public static double y5 = -10.85;
 
     //claw

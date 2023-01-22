@@ -40,22 +40,22 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static int top = -3000;
     public static int mid = -2150;
     public static int low = -1300;
-    public static int pickup = -70;
+    public static int pickup = 0;
 
     // to first pole
-    public static double x1 = 38.45;
+    public static double x1 = 38.3;
     public static double y1 = -1;
     //move up to line up for pickup
     public static double x2 = 50;
     public static double y2 = -2.5;
     //cone stack location
-    public static double x3 = 50.75;
-    public static double y3 = -23;
+    public static double x3 = 50.5;
+    public static double y3 = -22.8;
     //backup to score
-    public static double x4 = 50;
+    public static double x4 = 49.25;
     public static double y4 = 10;
     //score last cone on high
-    public static double x5 = 50;
+    public static double x5 = 49.25;
     public static double y5 = 10;
 
     //claw
@@ -63,7 +63,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static double sr1o = .48;
 
     //apriltag qr id
-    int id = 1;
+    int id = 0;
 
     //led
     RevBlinkinLedDriver lights;
