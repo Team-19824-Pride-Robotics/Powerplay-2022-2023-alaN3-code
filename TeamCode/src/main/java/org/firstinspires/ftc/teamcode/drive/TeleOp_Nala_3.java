@@ -17,16 +17,17 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 public class TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
-    public static double speed = 0.5;
+    public static double elevator_down_strength = .75;
+    public static double speed = 1;
     public static double sr1o = 0.48;
     public static double sr1c = 0.67;
     public static double al = .06;
-    public static double am = 0.38;
-    public static double ar = .73;
-    public static double top = -2800;
-    public static double mid = -2100;
-    public static double low = -1250;
-    public static double ground = -200;
+    public static double am = 0.40;
+    public static double ar = .72;
+    public static double top = -2000;
+    public static double mid = -1400;
+    public static double low = -850;
+    public static double ground = -100;
     public static double pickup = -20;
     public static double x1 = 35.91;
     public static double y1 = -28.22;
@@ -99,8 +100,8 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 speed = 0.5;
             }
 
-            double driving = (-gamepad1.left_stick_y) * speed;
-            double strafing = (gamepad1.left_stick_x) * 0;
+            double driving = (gamepad1.left_stick_y) * speed;
+            double strafing = (-gamepad1.left_stick_x) * 0;
             double turning = (-gamepad1.right_stick_x) * speed;
 
             if (gamepad1.right_bumper)
@@ -113,16 +114,16 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 strafing = (-gamepad1.right_trigger)*0.5;
             }
             if(gamepad1.dpad_left) {
-                strafing = -0.25;
-            }
-            if(gamepad1.dpad_right) {
                 strafing = 0.25;
             }
+            if(gamepad1.dpad_right) {
+                strafing = -0.25;
+            }
             if(gamepad1.dpad_up) {
-                driving = -0.25;
+                driving = 0.25;
             }
             if(gamepad1.dpad_down) {
-                driving = 0.25;
+                driving = -0.25;
             }
 
             drive.setWeightedDrivePower(
@@ -247,7 +248,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 servo3.setPosition(am);
                 elevator.setTargetPosition((int) pickup);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                elevator.setPower(elevator_down_strength);
             }
             //to move elevator manually, press left stick button to drop elevator and
             //right stick button to raise it

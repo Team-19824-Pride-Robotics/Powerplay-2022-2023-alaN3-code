@@ -20,8 +20,8 @@ public class test1 extends LinearOpMode {
         elevator = hardwareMap.get(DcMotor.class, "elevator");
 
 
-        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         waitForStart();
@@ -34,14 +34,13 @@ public class test1 extends LinearOpMode {
             telemetry.update();
 
             if (gamepad1.y) {
-                elevator.setTargetPosition(-1800);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(1);
+                elevator.setPower(-.2);
             }
                 if (gamepad1.x) {
-                    elevator.setTargetPosition(-20);
-                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    elevator.setPower(.75);
+                    elevator.setPower(.2);
+                }
+                else {
+                    elevator.setPower(0);
                 }
                 }
             }
