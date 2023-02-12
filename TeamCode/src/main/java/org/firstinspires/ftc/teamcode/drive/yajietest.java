@@ -1,23 +1,21 @@
 package org.firstinspires.ftc.teamcode.drive;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp(group = "drive")
 @Config
-public class test1 extends LinearOpMode {
+public class yajietest extends LinearOpMode {
 
 
     public void runOpMode() throws InterruptedException {
 
 
         DcMotor elevator;
-        elevator = hardwareMap.get(DcMotor.class, "elevator");
+        elevator = hardwareMap.get(DcMotor.class, "LF");
 
 
         //elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -25,7 +23,8 @@ public class test1 extends LinearOpMode {
 
 
         waitForStart();
-
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         while (!isStopRequested()) {
 
 
@@ -34,14 +33,18 @@ public class test1 extends LinearOpMode {
             telemetry.update();
 
             if (gamepad1.y) {
-                elevator.setPower(-.2);
+                elevator.setPower(.5);
+                elevator.setTargetPosition(-500);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             }
-                if (gamepad1.x) {
-                    elevator.setPower(.2);
-                }
-                else {
-                    elevator.setPower(0);
-                }
+
+            if (gamepad1.x) {
+                elevator.setPower(.5);
+                elevator.setTargetPosition(-20);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            }
+
+
                 }
             }
         }
