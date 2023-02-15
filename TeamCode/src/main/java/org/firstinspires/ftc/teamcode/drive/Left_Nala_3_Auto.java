@@ -36,9 +36,9 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double ar = .72;
 
     //junction
-    public static int top = -2000;
-    public static int mid = -1400;
-    public static int low = -850;
+    public static int top = -1950;
+    public static int mid = -1350;
+    public static int low = -800;
     public static int pickup = -20;
 
     // to first pole
@@ -159,9 +159,10 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
 
-                    //drive to high junction
+                    //drive to low junction
                     //.lineTo(new Vector2d(x1,y1))
                     .lineToLinearHeading(new Pose2d(x1, y1, Math.toRadians(0)))
+
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
                         elevator.setTargetPosition(low);
@@ -196,6 +197,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     //back up, turn, and then drive to cone stack
                     //.lineTo(new Vector2d(x2,y2))
 
+                    //drive forward a bit and turn towards the stack
                     .lineToLinearHeading(new Pose2d(x2, y2, Math.toRadians(0)))
                     .turn(Math.toRadians(90))
                     .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
