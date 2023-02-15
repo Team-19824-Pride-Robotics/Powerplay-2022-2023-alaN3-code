@@ -53,12 +53,10 @@ public class TeleOp_Nala_3 extends LinearOpMode {
         DcMotor elevator;
         Gyroscope imu;
         Servo servo1;
-        Servo servo2;
         Servo servo3;
 
         elevator = hardwareMap.get(DcMotor.class, "elevator");
         servo1 = hardwareMap.get(Servo.class, "servo1");
-        servo2 = hardwareMap.get(Servo.class, "servo2");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
@@ -83,7 +81,6 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
             telemetry.addData("Encoder elevator", elevator.getCurrentPosition());
             telemetry.addData("claw1 pos",servo1.getPosition());
-            telemetry.addData("claw2 pos",servo2.getPosition());
             telemetry.addData("arm pos",servo3.getPosition());
             telemetry.addData("Run time",getRuntime());
             telemetry.addData("temp",temp);
@@ -100,7 +97,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 speed = 0.5;
             }
 
-            double driving = (gamepad1.left_stick_y) * speed;
+            double driving = (-gamepad1.left_stick_y) * speed;
             double strafing = (-gamepad1.left_stick_x) * 0;
             double turning = (-gamepad1.right_stick_x) * speed;
 
@@ -114,16 +111,16 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 strafing = (-gamepad1.right_trigger)*0.5;
             }
             if(gamepad1.dpad_left) {
-                strafing = 0.25;
-            }
-            if(gamepad1.dpad_right) {
                 strafing = -0.25;
             }
+            if(gamepad1.dpad_right) {
+                strafing = 0.25;
+            }
             if(gamepad1.dpad_up) {
-                driving = 0.25;
+                driving = -0.25;
             }
             if(gamepad1.dpad_down) {
-                driving = -0.25;
+                driving = 0.25;
             }
 
             drive.setWeightedDrivePower(
@@ -195,14 +192,12 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             //open claw
             if(gamepad2.left_bumper /*&& ClawState == false*/) {
                 servo1.setPosition(sr1o);
-                //servo2.setPosition(sr2o);
                 //ClawState=true;
             }
 
             //close claw
             if(gamepad2.right_bumper /*&& ClawState == true*/) {
                 servo1.setPosition(sr1c);
-                //servo2.setPosition(sr2c);
                 //ClawState=false;
             }
 

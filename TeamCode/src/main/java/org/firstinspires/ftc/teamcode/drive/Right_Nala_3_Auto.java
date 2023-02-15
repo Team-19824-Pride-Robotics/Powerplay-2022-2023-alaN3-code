@@ -26,21 +26,20 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
-    public static double armMiddle = 0.38;
+    public static double armMiddle = .40;
     public static int topCone = -550;
     public static int secondCone = -400;
     public static int thirdcone = -250;
     public static double parkY = -13;
     public static double elevator_strength = 1;
     public static double al = .06;
-    public static double am = 0.38;
-    public static double ar = .73;
+    public static double ar = .72;
 
     //junction
-    public static int top = -3000;
-    public static int mid = -2150;
-    public static int low = -1300;
-    public static int pickup = 0;
+    public static int top = -2000;
+    public static int mid = -1400;
+    public static int low = -850;
+    public static int pickup = -20;
 
     // to first pole
     public static double x1 = 38.3;
