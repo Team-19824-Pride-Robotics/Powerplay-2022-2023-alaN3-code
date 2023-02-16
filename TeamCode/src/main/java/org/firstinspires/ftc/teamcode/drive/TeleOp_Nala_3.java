@@ -24,7 +24,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double al = .06;
     public static double am = 0.40;
     public static double ar = .72;
-    public static double top = -2000;
+    public static double top = -1950;
     public static double mid = -1400;
     public static double low = -850;
     public static double ground = -100;
@@ -93,8 +93,11 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             if (gamepad1.right_bumper) {
                 speed = 1;
             }
+            if (gamepad1.left_bumper) {
+                speed =.5;
+            }
             else {
-                speed = 0.5;
+                speed = .75;
             }
 
             double driving = (-gamepad1.left_stick_y) * speed;
