@@ -221,7 +221,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             if (gamepad2.dpad_down) {
                 elevator.setTargetPosition((int) ground);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                elevator.setPower(elevator_down_strength);
             }
             //elevator to high junction level
             if (gamepad2.y) {

@@ -32,6 +32,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static int thirdcone = -250;
     public static double parkY = -13;
     public static double elevator_strength = 1;
+    public static double elevator_down_strength = .7;
     public static double al = .06;
     public static double ar = .72;
 
@@ -188,7 +189,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(topCone);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        elevator.setPower(elevator_strength);
+                        elevator.setPower(elevator_down_strength);
                     })
 
                     //back up, turn, and then drive to cone stack
@@ -243,7 +244,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(secondCone);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        elevator.setPower(elevator_strength);
+                        elevator.setPower(elevator_down_strength);
                     })
 
                     //drive back to the cone stack
@@ -290,7 +291,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(thirdcone);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        elevator.setPower(elevator_strength);
+                        elevator.setPower(elevator_down_strength);
                     })
 
                     //drive back to the cone stack
@@ -337,7 +338,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         elevator.setTargetPosition(pickup);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        elevator.setPower(elevator_strength);
+                        elevator.setPower(elevator_down_strength);
                     })
                     .waitSeconds(1)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
