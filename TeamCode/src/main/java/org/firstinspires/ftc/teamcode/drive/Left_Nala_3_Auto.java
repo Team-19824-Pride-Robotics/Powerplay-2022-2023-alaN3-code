@@ -201,6 +201,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     //drive forward a bit and turn towards the stack
                     .lineToLinearHeading(new Pose2d(x2, y2, Math.toRadians(0)))
                     .turn(Math.toRadians(90))
+                    .waitSeconds(.5)
                     .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
 
                     //.lineTo(new Vector2d(x3,y3))
