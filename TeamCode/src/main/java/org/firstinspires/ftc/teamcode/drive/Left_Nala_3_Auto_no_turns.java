@@ -44,20 +44,20 @@ public class Left_Nala_3_Auto_no_turns extends LinearOpMode {
     public static int pickup = -20;
 
     // to first pole
-    public static double x1 = 38;
-    public static double y1 = 1.75;
+    public static double x1 = 0;
+    public static double y1 = -41;
     //move up to line up for pickup
-    public static double x2 = 49;
-    public static double y2 = 1.5;
+    public static double x2 = 0;
+    public static double y2 = -52;
     //cone stack location
-    public static double x3 = 49;
-    public static double y3 = 23.2;
+    public static double x3 = 22;
+    public static double y3 = -52;
     //backup to score
-    public static double x4 = 48.8;
-    public static double y4 = -10.85;
+    public static double x4 = -10;
+    public static double y4 = -52;
     //score last cone on high
-    public static double x5 = 49;
-    public static double y5 = -10.85;
+    public static double x5 = -10;
+    public static double y5 = -52;
 
     //claw
     public static double sr1c = .67;
@@ -157,18 +157,21 @@ public class Left_Nala_3_Auto_no_turns extends LinearOpMode {
                         servo3.setPosition(armMiddle);
                     })
 
-                    //.lineTo(new Vector2d(x1,y1))
-                    //.lineToLinearHeading(new Pose2d(x1, y1, Math.toRadians(0)))
-
-                    //strafe to low junction
-                    .strafeTo(new Vector2d(x1,y1))
-
                     //move arm up to low junction position
-                    .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(0.5, () -> {
                         elevator.setTargetPosition(low);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
+
+                    //wait for elevator to raise a bit so it misses ground junction
+                    .waitSeconds(0.5)
+
+
+                    //strafe to low junction
+                    .strafeTo(new Vector2d(x1,y1))
+
+
 //
                     //time for the arm to stop swinging
                     .waitSeconds(.25)
