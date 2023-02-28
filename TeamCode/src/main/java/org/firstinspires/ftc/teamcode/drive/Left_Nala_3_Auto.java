@@ -27,9 +27,9 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = .40;
-    public static int topCone = -345;
-    public static int secondCone = -340;
-    public static int thirdcone = -245;
+    public static int topCone = -310;
+    public static int secondCone = -300;
+    public static int thirdcone = -290;
     public static double parkY = -13;
     public static double elevator_strength = 1;
     public static double elevator_down_strength = .7;
@@ -44,7 +44,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
     public static double turn = 92;
     // to first pole
-    public static double x1 = 44;
+    public static double x1 = 42;
     public static double y1 = 1.85;
     //move up to line up for pickup
     public static double x2 = 50;
@@ -167,12 +167,12 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
-                        elevator.setTargetPosition(mid);
+                        elevator.setTargetPosition(low);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(ar);
+                        servo3.setPosition(al);
                     })
 
                     //time for the arm to stop swinging
@@ -214,7 +214,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
                         servo1.setPosition(sr1c);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(0.2, () -> {
                         elevator.setTargetPosition(top);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
@@ -348,7 +348,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     })
                     .waitSeconds(1)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        servo1.setPosition(sr1o);
+                        servo1.setPosition(sr1c);
                     })
                     //use the parkY variable to park in the correct zone
                     .forward(parkY)
