@@ -27,9 +27,9 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = .40;
-    public static int topCone = -575;
-    public static int secondCone = -425;
-    public static int thirdcone = -375;
+    public static int topCone = -345;
+    public static int secondCone = -340;
+    public static int thirdcone = -245;
     public static double parkY = -13;
     public static double elevator_strength = 1;
     public static double elevator_down_strength = .7;
@@ -37,29 +37,30 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double ar = .72;
 
     //junction
-    public static int top = -1950;
+    public static int top = -2000;
     public static int mid = -1350;
     public static int low = -800;
     public static int pickup = -20;
 
+    public static double turn = 92;
     // to first pole
-    public static double x1 = 38;
-    public static double y1 = 1.75;
+    public static double x1 = 44;
+    public static double y1 = 1.85;
     //move up to line up for pickup
-    public static double x2 = 49;
-    public static double y2 = 1.5;
+    public static double x2 = 50;
+    public static double y2 = 1.85;
     //cone stack location
-    public static double x3 = 49;
-    public static double y3 = 23.2;
+    public static double x3 = 50;
+    public static double y3 = 27.3;
     //backup to score
-    public static double x4 = 48.8;
-    public static double y4 = -10.85;
+    public static double x4 = 50.2;
+    public static double y4 = -6.5;
     //score last cone on high
-    public static double x5 = 49;
-    public static double y5 = -10.85;
+    public static double x5 = 50;
+    public static double y5 = -6.3;
 
     //claw
-    public static double sr1c = .67;
+    public static double sr1c = .68;
     public static double sr1o = .48;
 
     //april tag qr id
@@ -166,12 +167,12 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //move arm up, then swing it into position (while driving)
                     .UNSTABLE_addTemporalMarkerOffset(-1.75, () -> {
-                        elevator.setTargetPosition(low);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(al);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -200,9 +201,9 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //drive forward a bit and turn towards the stack
                     .lineToLinearHeading(new Pose2d(x2, y2, Math.toRadians(0)))
-                    .turn(Math.toRadians(90))
+                    .turn(Math.toRadians(turn))
                     .waitSeconds(.5)
-                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
 
                     //.lineTo(new Vector2d(x3,y3))
                    // .lineToLinearHeading(new Pose2d(x3, 2, Math.toRadians(0)))
@@ -224,7 +225,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //drive to the high junction
                     //.lineTo(new Vector2d(x4,y4))
-                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(turn)))
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
@@ -253,7 +254,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //drive back to the cone stack
-                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
 
                     //.lineTo(new Vector2d(x3,y3))
 
@@ -271,7 +272,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(turn)))
                     //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving
@@ -300,7 +301,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //drive back to the cone stack
-                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
 
                     //.lineTo(new Vector2d(x3,y3))
 
@@ -318,7 +319,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineToLinearHeading(new Pose2d(x5, y5, Math.toRadians(90)))
+                    .lineToLinearHeading(new Pose2d(x5, y5, Math.toRadians(turn)))
                     //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving

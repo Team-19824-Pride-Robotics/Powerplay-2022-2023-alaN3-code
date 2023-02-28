@@ -20,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Left_Nala_3_Auto")
+@Autonomous(name="Left_Nala_3_Auto_no_turns")
 
 //@Disabled
 public class Left_Nala_3_Auto_no_turns extends LinearOpMode {

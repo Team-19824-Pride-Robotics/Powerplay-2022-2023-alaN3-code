@@ -24,7 +24,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double al = .06;
     public static double am = 0.40;
     public static double ar = .72;
-    public static double top = -1950;
+    public static double top = -2000;
     public static double mid = -1400;
     public static double low = -850;
     public static double ground = -100;
@@ -170,7 +170,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                     .build();
             drive.followTrajectorySequenceAsync(trajSeq);
         }
-*/
+
             if (gamepad1.y) {
                 TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
                         .back(36)
@@ -187,7 +187,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             }
 
 
-
+*/
             /*//////////////////////////
             DRIVER 2 CONTROLS START HERE
             *///////////////////////////
