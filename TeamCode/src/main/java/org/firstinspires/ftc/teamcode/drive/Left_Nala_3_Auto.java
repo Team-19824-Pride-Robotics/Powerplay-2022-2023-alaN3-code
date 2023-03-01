@@ -27,37 +27,40 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = .40;
-    public static int topCone = -310;
-    public static int secondCone = -300;
-    public static int thirdcone = -290;
-    public static double parkY = -13;
+    public static int topCone = -340;
+    public static int secondCone = -240;
+    public static int thirdcone = -200;
+    public static double parkY = -17;
     public static double elevator_strength = 1;
-    public static double elevator_down_strength = .7;
+    public static double elevator_down_strength = .5;
     public static double al = .06;
     public static double ar = .72;
 
     //junction
     public static int top = -2000;
     public static int mid = -1350;
-    public static int low = -800;
+    public static int low = -850;
     public static int pickup = -20;
 
     public static double turn = 92;
     // to first pole
     public static double x1 = 42;
-    public static double y1 = 1.85;
+    public static double y1 = 1;
     //move up to line up for pickup
     public static double x2 = 50;
-    public static double y2 = 1.85;
+    public static double y2 = 1;
     //cone stack location
     public static double x3 = 50;
-    public static double y3 = 27.3;
+    public static double y3 = 27;
     //backup to score
-    public static double x4 = 50.2;
-    public static double y4 = -6.5;
+    public static double x4 = 50.75;
+    public static double y4 = -6.2;
     //score last cone on high
-    public static double x5 = 50;
-    public static double y5 = -6.3;
+    public static double x5 = 51;
+    public static double y5 = -6.5;
+    //push cone out the way
+    public static double x6 = 60;
+    public static double y6 = 1;
 
     //claw
     public static double sr1c = .68;
@@ -148,11 +151,11 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
             //apriltag
             if (id == 0)
-                parkY = 31.8;
+                parkY = 32;
             else if (id == 1)
                 parkY = 10;
             else if (id == 2)
-                parkY = -13;
+                parkY = -17;
 
             TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(startPose)
 
@@ -200,7 +203,8 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     //.lineTo(new Vector2d(x2,y2))
 
                     //drive forward a bit and turn towards the stack
-                    .lineToLinearHeading(new Pose2d(x2, y2, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(x6, y6, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(0)))
                     .turn(Math.toRadians(turn))
                     .waitSeconds(.5)
                     .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))

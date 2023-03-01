@@ -32,7 +32,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static int thirdcone = -250;
     public static double parkY = -13;
     public static double elevator_strength = 1;
-    public static double elevator_down_strength = .7;
+    public static double elevator_down_strength = .5;
     public static double al = .06;
     public static double ar = .72;
 
