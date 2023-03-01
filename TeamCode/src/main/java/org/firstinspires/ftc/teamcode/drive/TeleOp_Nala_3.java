@@ -259,27 +259,40 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(elevator_down_strength);
             }
+            */
+
             //to move elevator manually, press left stick button to drop elevator and
             //right stick button to raise it
 
             if (gamepad2.left_stick_button) {
 
-                double score = elevator.getCurrentPosition() + downToScore;
+                double score = elevator.getCurrentPosition() - downToScore;
+                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) score);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 elevator.setPower(elevator_down_strength);
 
             }
-             */
+            if (gamepad2.right_stick_button) {
 
-
-            if (gamepad2.b)  {
+                double score = elevator.getCurrentPosition() + downToScore;
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                elevator.setTargetPosition((int) pos);
+                elevator.setTargetPosition((int) score);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                elevator.setPower(elevator_down_strength);
+
             }
+
+
+
+//            if (gamepad2.b)  {
+//                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                elevator.setTargetPosition((int) pos);
+//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                elevator.setPower(elevator_strength);
+//            }
 
             //led control
             if(temp == 1) {
