@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 public class TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
-    public static double elevator_down_strength = .5;
+    public static double elevator_down_strength = 0.5;
     public static double speed = 1;
     public static double sr1o = 0.48;
     public static double sr1c = 0.67;
@@ -28,7 +28,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double mid = -1400;
     public static double low = -850;
     public static double ground = -100;
-    public static double pickup = -20;
+    public static double pickup = -30;
     public static double x1 = 35.91;
     public static double y1 = -28.22;
     public static double x2 = .754;
@@ -249,20 +249,23 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             }
 
             //turn off encoders and manually move elevator down
-            if (gamepad2.b) {
-                servo3.setPosition(am);
-                elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                elevator.setPower(gamepad2.left_stick_y);
-            }
+//            if (gamepad2.b) {
+//                servo3.setPosition(am);
+//                servo1.setPosition(sr1c);
+//                elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//                if (gamepad2.left_stick_y > 0.5) {
+//                    elevator.setPower(gamepad2.left_stick_y * 0.5);
+//                }
+//            }
 
-            /* elevator to pickup level
+            // elevator to pickup level
             if (gamepad2.b) {
                 servo3.setPosition(am);
                 elevator.setTargetPosition((int) pickup);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(elevator_down_strength);
             }
-            */
+
 
             //to move elevator manually, press left stick button to drop elevator and
             //right stick button to raise it
