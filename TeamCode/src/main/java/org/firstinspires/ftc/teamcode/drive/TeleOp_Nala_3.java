@@ -24,7 +24,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double al = .06;
     public static double am = 0.40;
     public static double ar = .72;
-    public static double top = -2000;
+    public static double top = -2030;
     public static double mid = -1400;
     public static double low = -850;
     public static double ground = -100;
@@ -220,12 +220,12 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 servo3.setPosition(ar);
             }
             //elevator to ground terminal level
-            if (gamepad2.dpad_down) {
-                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                elevator.setTargetPosition((int) ground);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_down_strength);
-            }
+//            if (gamepad2.dpad_down) {
+//                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                elevator.setTargetPosition((int) ground);
+//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                elevator.setPower(elevator_down_strength);
+//            }
             //elevator to high junction level
             if (gamepad2.y) {
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -247,7 +247,10 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator.setPower(elevator_strength);
             }
+
+            //turn off encoders and manually move elevator down
             if (gamepad2.b) {
+                servo3.setPosition(am);
                 elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 elevator.setPower(gamepad2.left_stick_y);
             }
@@ -266,6 +269,16 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
             if (gamepad2.left_stick_button) {
 
+                double score = elevator.getCurrentPosition() + downToScore;
+                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                elevator.setTargetPosition((int) score);
+                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                elevator.setPower(elevator_strength);
+
+            }
+            if (gamepad2.right_stick_button) {
+
                 double score = elevator.getCurrentPosition() - downToScore;
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) score);
@@ -274,14 +287,12 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setPower(elevator_down_strength);
 
             }
-            if (gamepad2.right_stick_button) {
 
-                double score = elevator.getCurrentPosition() + downToScore;
-                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                elevator.setTargetPosition((int) score);
-                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                elevator.setPower(elevator_down_strength);
+            //reset the encoder in case it gets off track
+
+            if(gamepad2.start) {
+
+                elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             }
 
