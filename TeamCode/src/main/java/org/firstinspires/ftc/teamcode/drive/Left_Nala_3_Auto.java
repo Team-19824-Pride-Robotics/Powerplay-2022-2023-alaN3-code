@@ -27,7 +27,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     public static double armMiddle = .40;
-    public static int topCone = -340;
+    public static int topCone = -300;
     public static int secondCone = -240;
     public static int thirdcone = -200;
     public static double parkY = -17;
@@ -53,14 +53,18 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double x3 = 52;
     public static double y3 = 25.5;
     //backup to score
-    public static double x4 = 50.75;
-    public static double y4 = -8;
+    public static double x4 = 48.8;
+    public static double y4 = -8.4;
     //score last cone on high
-    public static double x5 = 51;
-    public static double y5 = -6.5;
+    public static double x5 = 49.5;
+    public static double y5 = -8.4;
+    // score second cone on high
+    public static double x7 = 49.8;
+    public static double y7 = -8.4;
     //push cone out the way
     public static double x6 = 60;
     public static double y6 = 1;
+
 
     //claw
     public static double sr1c = .68;
@@ -276,7 +280,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(turn)))
+                    .lineToLinearHeading(new Pose2d(x7, y7, Math.toRadians(turn)))
                     //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving
@@ -323,7 +327,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .waitSeconds(0.5)
 
                     //drive to the high junction
-                    .lineToLinearHeading(new Pose2d(x4, y4, Math.toRadians(turn)))
+                    .lineToLinearHeading(new Pose2d(x5, y5, Math.toRadians(turn)))
                     //.lineTo(new Vector2d(x4,y4))
 
                     //swing the arm to the right while driving

@@ -17,10 +17,10 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 public class TeleOp_Nala_3 extends LinearOpMode {
 
     public static double elevator_strength = 1;
-    public static double elevator_down_strength = 0.5;
+    public static double elevator_down_strength = 0.7;
     public static double speed = 1;
     public static double sr1o = 0.48;
-    public static double sr1c = 0.67;
+    public static double sr1c = 0.7;
     public static double al = .06;
     public static double am = 0.40;
     public static double ar = .72;
@@ -36,7 +36,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double h1 = 180;
     public static double h2 = 180;
     public static double downToScore = 150;
-    public static double bumpUpElevator = 150;
+    public static double bumpUpElevator = 170;
     public boolean ClawState = true;
     public static double pos = 0;
     int temp = 1;
