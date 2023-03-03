@@ -42,28 +42,28 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static int low = -850;
     public static int pickup = -20;
 
-    public static double turn = -90;
+    public static double turn = -92;
     // to first pole
     public static double x1 = 43;
-    public static double y1 = 0;
+    public static double y1 = -1.5;
     //move up to line up for pickup
     public static double x2 = 50;
-    public static double y2 = -1;
+    public static double y2 = -1.5;
     //cone stack location
-    public static double x3 = 52;
-    public static double y3 = -25.5;
+    public static double x3 = 49.5;
+    public static double y3 = -26.4;
     //backup to score
     public static double x4 = 48.8;
-    public static double y4 = 8.4;
+    public static double y4 = 7;
     //score last cone on high
-    public static double x5 = 49.5;
-    public static double y5 = 8.4;
+    public static double x5 = 49;
+    public static double y5 = 7;
     // score second cone on high
-    public static double x7 = 49.8;
-    public static double y7 = 8.4;
+    public static double x7 = 49;
+    public static double y7 = 7;
     //push cone out the way
     public static double x6 = 60;
-    public static double y6 = -1;
+    public static double y6 = -1.5;
 
 
     //claw
@@ -124,7 +124,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
         lights.setPattern(pattern);
 
 
@@ -150,7 +150,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
         if (opModeIsActive()) {
 
             //led
-            pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
+            pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
             lights.setPattern(pattern);
 
             //apriltag
@@ -222,7 +222,8 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
                         servo1.setPosition(sr1c);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+
+                    .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
                         elevator.setTargetPosition(top);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
@@ -346,7 +347,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo3.setPosition(armMiddle);
                     })
                     //time to score and then swing the arm back
-                    .waitSeconds(1.15)
+                    .waitSeconds(1)
 
                     //lower the elevator to pickup position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -354,7 +355,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_down_strength);
                     })
-                    .waitSeconds(1)
+                    .waitSeconds(.75)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
                         servo1.setPosition(sr1c);
                     })

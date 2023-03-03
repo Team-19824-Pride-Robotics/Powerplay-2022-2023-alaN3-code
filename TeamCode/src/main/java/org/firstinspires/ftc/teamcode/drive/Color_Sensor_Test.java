@@ -54,12 +54,12 @@ public class Color_Sensor_Test extends LinearOpMode {
             telemetry.update();
 
         if (color.red() > 900 || color.blue() > 900) {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
                 lights.setPattern(pattern);
             }
 
             else {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
                 lights.setPattern(pattern);
             }
         }

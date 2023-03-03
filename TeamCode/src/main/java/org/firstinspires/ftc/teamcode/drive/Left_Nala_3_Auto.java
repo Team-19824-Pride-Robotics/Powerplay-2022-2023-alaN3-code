@@ -124,7 +124,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
         lights.setPattern(pattern);
 
 
@@ -150,7 +150,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         if (opModeIsActive()) {
 
             //led
-            pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
+            pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
             lights.setPattern(pattern);
 
             //apriltag
@@ -222,7 +222,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
                         servo1.setPosition(sr1c);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
                         elevator.setTargetPosition(top);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
@@ -346,7 +346,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                         servo3.setPosition(armMiddle);
                     })
                     //time to score and then swing the arm back
-                    .waitSeconds(1.15)
+                    .waitSeconds(1)
 
                     //lower the elevator to pickup position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -354,7 +354,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_down_strength);
                     })
-                    .waitSeconds(1)
+                    .waitSeconds(.75)
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
                         servo1.setPosition(sr1c);
                     })

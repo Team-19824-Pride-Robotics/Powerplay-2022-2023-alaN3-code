@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -43,6 +44,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
     RevBlinkinLedDriver lights;
     RevBlinkinLedDriver.BlinkinPattern pattern;
+    ColorSensor color;
 
 
 
@@ -60,6 +62,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
+        color = hardwareMap.get(ColorSensor.class, "Color");
 
 
         //reset encoder
@@ -67,7 +70,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //led
-        pattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
         lights.setPattern(pattern);
 
         waitForStart();
@@ -309,22 +312,16 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 //            }
 
             //led control
-            if(temp == 1) {
-                resetRuntime();
-                temp = 2;
-            }
-            if(time >= 80 && time <= 82){
-                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
+            if (color.red() > 900 || color.blue() > 900) {
+                pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
                 lights.setPattern(pattern);
             }
-            if(time >= 93 && time <= 95){
-                pattern = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED;
-                lights.setPattern(pattern);
-            }
+
             else {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
+                pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
                 lights.setPattern(pattern);
             }
+
 
 
 
