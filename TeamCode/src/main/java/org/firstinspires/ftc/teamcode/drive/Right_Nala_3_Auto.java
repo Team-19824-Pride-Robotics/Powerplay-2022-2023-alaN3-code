@@ -95,7 +95,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(800, 448, OpenCvCameraRotation.SIDEWAYS_RIGHT); //UPRIGHT
             }
 
             @Override
