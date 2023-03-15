@@ -19,10 +19,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Right_Nala_3_Auto")
+@Autonomous(name="Left_Nala_3_Auto_ALT")
 
 //@Disabled
-public class Right_Nala_3_Auto extends LinearOpMode {
+public class Left_Nala_3_Auto_ALT extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -38,32 +38,32 @@ public class Right_Nala_3_Auto extends LinearOpMode {
 
     //junction
     public static int top = -2000;
-    public static int mid = -1350;
+    public static int mid = -1450;
     public static int low = -850;
     public static int pickup = -20;
 
-    public static double turn = -92;
+    public static double turn = 90;
     // to first pole
     public static double x1 = 43;
-    public static double y1 = -1;
+    public static double y1 = -.5;
     //move up to line up for pickup
     public static double x2 = 50;
-    public static double y2 = -1;
+    public static double y2 = -.5;
     //cone stack location
-    public static double x3 = 49.85;
-    public static double y3 = -26.4;
+    public static double x3 = 51.5;
+    public static double y3 = 25.5;
     //backup to score
-    public static double x4 = 48.8;
-    public static double y4 = 7;
+    public static double x4 = 51.4;
+    public static double y4 = -8.2;
     //score last cone on high
-    public static double x5 = 49.1;
-    public static double y5 = 7;
+    public static double x5 = 51.4;
+    public static double y5 = -8.2;
     // score second cone on high
-    public static double x7 = 49;
-    public static double y7 = 7;
+    public static double x7 = 51.3;
+    public static double y7 = -8;
     //push cone out the way
     public static double x6 = 60;
-    public static double y6 = -1;
+    public static double y6 = -.5;
 
 
     //claw
@@ -138,7 +138,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     id = tag.id;
                 }
             }
-            else
+             else
                 telemetry.addLine("Don't see tag :(");
             telemetry.update();
             sleep(20);
@@ -179,7 +179,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         elevator.setPower(elevator_strength);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(ar);
+                        servo3.setPosition(al);
                     })
 
                     //time for the arm to stop swinging
@@ -214,7 +214,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
 
                     //.lineTo(new Vector2d(x3,y3))
-                    // .lineToLinearHeading(new Pose2d(x3, 2, Math.toRadians(0)))
+                   // .lineToLinearHeading(new Pose2d(x3, 2, Math.toRadians(0)))
 
                     //.splineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(90)), Math.toRadians(0))
 
@@ -222,9 +222,8 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(-0.2, () -> {
                         servo1.setPosition(sr1c);
                     })
-
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -272,7 +271,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -319,7 +318,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })

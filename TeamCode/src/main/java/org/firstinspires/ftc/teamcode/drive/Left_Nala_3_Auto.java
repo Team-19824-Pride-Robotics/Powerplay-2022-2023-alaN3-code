@@ -29,7 +29,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double armMiddle = .40;
     public static int topCone = -300;
     public static int secondCone = -240;
-    public static int thirdcone = -200;
+    public static int thirdcone = -180;
     public static double parkY = -17;
     public static double elevator_strength = 1;
     public static double elevator_down_strength = .7;
@@ -45,25 +45,25 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double turn = 90;
     // to first pole
     public static double x1 = 43;
-    public static double y1 = 0;
+    public static double y1 = -.5;
     //move up to line up for pickup
     public static double x2 = 50;
-    public static double y2 = 1;
+    public static double y2 = -.5;
     //cone stack location
     public static double x3 = 52;
     public static double y3 = 25.5;
     //backup to score
     public static double x4 = 48.8;
-    public static double y4 = -8.4;
+    public static double y4 = -8.48;
     //score last cone on high
-    public static double x5 = 49.5;
-    public static double y5 = -8.4;
+    public static double x5 = 48.5;
+    public static double y5 = -8.6;
     // score second cone on high
-    public static double x7 = 49.8;
-    public static double y7 = -8.4;
+    public static double x7 = 48.7;
+    public static double y7 = -8.7;
     //push cone out the way
     public static double x6 = 60;
-    public static double y6 = 1;
+    public static double y6 = -.5;
 
 
     //claw
@@ -95,7 +95,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                camera.startStreaming(800, 448, OpenCvCameraRotation.SIDEWAYS_RIGHT); //UPRIGHT
+                camera.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT); //UPRIGHT
             }
 
             @Override
@@ -157,7 +157,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
             if (id == 0)
                 parkY = 32;
             else if (id == 1)
-                parkY = 10;
+                parkY = 9;
             else if (id == 2)
                 parkY = -17;
 
@@ -183,7 +183,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(.25)
+                    .waitSeconds(.1)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -342,6 +342,55 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
+
+                    .UNSTABLE_addTemporalMarkerOffset(.25, () -> {
+                        servo3.setPosition(armMiddle);
+                    })
+
+                    //time to score and then swing the arm back
+                    .waitSeconds(1.15)
+
+                    //lower the elevator to "second cone" position
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        elevator.setTargetPosition(secondCone);
+                        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        elevator.setPower(elevator_down_strength);
+                    })
+
+                    .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
+
+                    //.lineTo(new Vector2d(x3,y3))
+
+                    //grab second cone and then raise the elevator up before backing away
+                    .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> {
+                        servo1.setPosition(sr1c);
+                    })
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        elevator.setTargetPosition(top);
+                        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        elevator.setPower(elevator_strength);
+                    })
+
+                    //time to grab the cone and raise elevator
+                    .waitSeconds(0.5)
+
+                    //drive to the high junction
+                    .lineToLinearHeading(new Pose2d(x5, y5, Math.toRadians(turn)))
+                    //.lineTo(new Vector2d(x4,y4))
+
+                    //swing the arm to the right while driving
+                    .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
+                        servo3.setPosition(ar);
+                    })
+
+                    //time for the arm to stop swinging
+                    .waitSeconds(.25)
+
+                    //open claw and swing arm back to middle
+                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                        servo1.setPosition(sr1o);
+                    })
+
                     .UNSTABLE_addTemporalMarkerOffset(.25, () -> {
                         servo3.setPosition(armMiddle);
                     })
