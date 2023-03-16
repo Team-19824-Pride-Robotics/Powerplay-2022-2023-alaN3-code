@@ -44,7 +44,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
     RevBlinkinLedDriver lights;
     RevBlinkinLedDriver.BlinkinPattern pattern;
-    ColorSensor color;
+
 
 
 
@@ -62,7 +62,6 @@ public class TeleOp_Nala_3 extends LinearOpMode {
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
-        color = hardwareMap.get(ColorSensor.class, "Color");
 
 
         //reset encoder
@@ -312,15 +311,6 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 //            }
 
             //led control
-            if (color.red() > 900 || color.blue() > 900) {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
-                lights.setPattern(pattern);
-            }
-
-            else {
-                pattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
-                lights.setPattern(pattern);
-            }
 
 
 
