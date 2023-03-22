@@ -47,11 +47,11 @@ import com.qualcomm.robotcore.util.Range;
 @Config
 public class PID_Test extends LinearOpMode {
 
-    public static double Kp = .05;
+    public static double Kp = .04;
     public static double Ki = 0;
-    public static double Kd = .001;
+    public static double Kd = .00015;
 
-    public static double targetPos = -300;
+    public static double targetPos = 0;
     public static double integralSum = 0;
     public static double lastError = 0;
     public static double error = 0;
@@ -59,41 +59,36 @@ public class PID_Test extends LinearOpMode {
     public static double derivative = 0;
     public static double power = 0;
 
-    private DcMotorEx elevator;
+    public static int top = -1500;
+    public static int mid = -1000;
+    public static int low = -500;
+    public static int pickup = -20;
+
+    private DcMotorEx elevator1;
+    private DcMotorEx elevator2;
+
 
 
     public void runOpMode() throws InterruptedException {
 
-        elevator = hardwareMap.get(DcMotorEx.class, "elevator");
-        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
+        elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
+        elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            /*
-
-             * Proportional Integral Derivative Controller
-
-             */
-
-
 
 // Elapsed timer class from SDK, please use it, it's epic
             ElapsedTime timer = new ElapsedTime();
 
-            boolean setPointIsNotReached = false;
-            if (targetPos - encoderPosition < 10 && targetPos - encoderPosition < -10) {
-                setPointIsNotReached = true;
-            }
-            else setPointIsNotReached = false;
-
-
-            if (setPointIsNotReached) {
                 // obtain the encoder position
-                encoderPosition = elevator.getCurrentPosition();
+                encoderPosition = elevator1.getCurrentPosition();
                 // calculate the error
                 error = targetPos - encoderPosition;
 
@@ -103,15 +98,31 @@ public class PID_Test extends LinearOpMode {
                 // sum of all error over time
                 integralSum = integralSum + (error * timer.seconds());
 
-                power = (Kp * error) + (Ki * integralSum) + (Kd * derivative);
+                power = ((Kp * error) + (Ki * integralSum) + (Kd * derivative));
+
+                elevator1.setPower(power);
+                elevator2.setPower(power);
 
                 lastError = error;
-                elevator.setPower(power);
 
                 // reset the timer for next time
                 timer.reset();
+
+            if (gamepad1.y) {
+                targetPos = top;
             }
 
+            if (gamepad1.x) {
+                targetPos = mid;
+            }
+
+            if (gamepad1.a) {
+                targetPos = low;
+            }
+
+            if (gamepad1.b) {
+                targetPos = pickup;
+            }
 
 
             telemetry.addData("pos", encoderPosition);
