@@ -40,14 +40,14 @@ public class teleoptest extends LinearOpMode {
     int temp = 1;
 
     //pid
-    public static int top = -1500;
-    public static int mid = -1000;
-    public static int low = -500;
-    public static int pickup = -20;
+    public static int top = -2030;
+    public static int mid = -1400;
+    public static int low = -850;
+    public static int pickup = -30;
 
-    public static double Kp = .04;
+    public static double Kp = .02;
     public static double Ki = 0;
-    public static double Kd = .00015;
+    public static double Kd = .0003;
 
     public static double targetPos = 0;
     public static double integralSum = 0;
@@ -56,6 +56,7 @@ public class teleoptest extends LinearOpMode {
     public static double encoderPosition = 0;
     public static double derivative = 0;
     public static double power = 0;
+    public static double newpower = 0;
 
     RevBlinkinLedDriver lights;
     RevBlinkinLedDriver.BlinkinPattern pattern;
@@ -99,15 +100,16 @@ public class teleoptest extends LinearOpMode {
 
             // telemetry
             Pose2d poseEstimate = drive.getPoseEstimate();
+            telemetry.addData("power", power);
+            telemetry.addData("newpower", newpower);
+            telemetry.addData("pos", encoderPosition);
+            telemetry.addData("target", targetPos);
             telemetry.addData("x", poseEstimate.getX());
             telemetry.addData("y", poseEstimate.getY());
             telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
             telemetry.addData("claw1 pos",servo1.getPosition());
             telemetry.addData("arm pos",servo3.getPosition());
             telemetry.addData("Run time",getRuntime());
-            telemetry.addData("pos", encoderPosition);
-            telemetry.addData("target", targetPos);
-            telemetry.addData("power", power);
             telemetry.update();
 
 
@@ -133,10 +135,10 @@ public class teleoptest extends LinearOpMode {
                 driving = (-gamepad1.left_stick_y) * 1;
 
             if(gamepad1.left_trigger>0.3) {
-                strafing = (gamepad1.left_trigger)*0.5;
+                strafing = (gamepad1.left_trigger)*0.75;
             }
             if(gamepad1.right_trigger>0.3) {
-                strafing = (-gamepad1.right_trigger)*0.5;
+                strafing = (-gamepad1.right_trigger)*0.75;
             }
             if(gamepad1.dpad_left) {
                 strafing = -0.25;
@@ -258,13 +260,21 @@ public class teleoptest extends LinearOpMode {
                 targetPos = pickup;
             }
 
+            if (gamepad2.right_stick_button) {
 
+                targetPos = elevator1.getCurrentPosition() - downToScore;
+            }
+
+            if (gamepad2.left_stick_button) {
+
+                targetPos = elevator1.getCurrentPosition() + downToScore;
+            }
             //reset the encoder in case it gets off track
 
             if(gamepad2.start) {
 
                 elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+               elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
 
 
@@ -287,8 +297,11 @@ public class teleoptest extends LinearOpMode {
 
             power = ((Kp * error) + (Ki * integralSum) + (Kd * derivative));
 
+
+
             elevator1.setPower(power);
             elevator2.setPower(power);
+
 
             lastError = error;
 

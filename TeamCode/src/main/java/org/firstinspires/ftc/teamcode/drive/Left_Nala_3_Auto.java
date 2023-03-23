@@ -49,7 +49,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double y1 = -.5;
     //move up to line up for pickup
     public static double x2 = 50;
-    public static double y2 = -.5;
+    public static double y2 = -3;
     //cone stack location
     public static double x3 = 52;
     public static double y3 = 25.5;
@@ -111,12 +111,10 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         DcMotorEx elevator;
-        DcMotorEx elevator2;
         Servo servo1;
         Servo servo3;
 
         elevator = hardwareMap.get(DcMotorEx.class, "elevator");
-        elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
@@ -125,8 +123,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         //led
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
@@ -213,9 +210,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //drive forward a bit and turn towards the stack
                     .lineToLinearHeading(new Pose2d(x6, y6, Math.toRadians(0)))
-                    .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(0)))
-                    .turn(Math.toRadians(turn))
-                    .waitSeconds(.5)
+                    .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(turn)))
                     .lineToLinearHeading(new Pose2d(x3, y3, Math.toRadians(turn)))
 
                     //.lineTo(new Vector2d(x3,y3))

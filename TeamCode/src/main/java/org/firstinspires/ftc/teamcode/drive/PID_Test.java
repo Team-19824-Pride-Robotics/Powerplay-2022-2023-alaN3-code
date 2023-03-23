@@ -47,9 +47,9 @@ import com.qualcomm.robotcore.util.Range;
 @Config
 public class PID_Test extends LinearOpMode {
 
-    public static double Kp = .04;
+    public static double Kp = .02;
     public static double Ki = 0;
-    public static double Kd = .00015;
+    public static double Kd = .0003;
 
     public static double targetPos = 0;
     public static double integralSum = 0;
