@@ -6,6 +6,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -109,11 +110,13 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
         drive.setPoseEstimate(startPose);
 
-        DcMotor elevator;
+        DcMotorEx elevator;
+        DcMotorEx elevator2;
         Servo servo1;
         Servo servo3;
 
-        elevator = hardwareMap.get(DcMotor.class, "elevator");
+        elevator = hardwareMap.get(DcMotorEx.class, "elevator");
+        elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
@@ -122,6 +125,8 @@ public class Left_Nala_3_Auto extends LinearOpMode {
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //led
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
