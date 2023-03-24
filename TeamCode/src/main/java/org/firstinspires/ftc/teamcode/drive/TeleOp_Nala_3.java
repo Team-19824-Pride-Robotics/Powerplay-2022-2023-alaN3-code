@@ -46,8 +46,6 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     RevBlinkinLedDriver.BlinkinPattern pattern;
 
 
-
-
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 

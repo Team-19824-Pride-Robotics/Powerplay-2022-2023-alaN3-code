@@ -5,20 +5,19 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.drive.advanced.PoseStorage;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 
 @TeleOp(group = "drive")
 @Config
-public class teleoptest extends LinearOpMode {
+public class teleoptest_v2 extends LinearOpMode {
 
     public static double speed = 1;
     public static double sr1o = 0.48;
@@ -33,9 +32,9 @@ public class teleoptest extends LinearOpMode {
     public static int low = -500;
     public static int pickup = -20;
 
-    public static double Kp = .02;
+    public static double Kp = .004;
     public static double Ki = 0;
-    public static double Kd = .0003;
+    public static double Kd = .00009;
 
     public static double targetPos = 0;
     public static double integralSum = 0;
@@ -53,27 +52,24 @@ public class teleoptest extends LinearOpMode {
 
 
     public void runOpMode() throws InterruptedException {
+        //initialize our drive
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
         drive.setPoseEstimate(PoseStorage.currentPose);
+
+        // Initialize our lift
+        Lift lift = new Lift(hardwareMap);
 
         Gyroscope imu;
         Servo servo1;
         Servo servo3;
 
-        elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
-        elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
 
-
         //reset encoder
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         //led
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
@@ -82,35 +78,6 @@ public class teleoptest extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-
-
-            /*//////////////////////////
-              PID CODE START HERE
-            *///////////////////////////
-
-            // Elapsed timer class from SDK, please use it, it's epic
-            ElapsedTime timer = new ElapsedTime();
-
-            // obtain the encoder position
-            encoderPosition = elevator1.getCurrentPosition();
-            // calculate the error
-            error = targetPos - encoderPosition;
-
-            // rate of change of the error
-            derivative = (error - lastError) / timer.seconds();
-
-            // sum of all error over time
-            integralSum = integralSum + (error * timer.seconds());
-
-            power = ((Kp * error) + (Ki * integralSum) + (Kd * derivative));
-
-            elevator1.setPower(power);
-            elevator2.setPower(power);
-
-            lastError = error;
-
-            // reset the timer for next time
-            timer.reset();
 
             // telemetry
             Pose2d poseEstimate = drive.getPoseEstimate();
@@ -230,13 +197,49 @@ public class teleoptest extends LinearOpMode {
 
                 targetPos = elevator1.getCurrentPosition() + downToScore;
             }
-            //reset the encoder in case it gets off track
 
-            if(gamepad2.start) {
+            lift.update();
 
-                elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-               elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            }
+        }
+    }
+
+    // our lift class allows us to update the elevator without interrupting the drive code
+    class Lift {
+        public Lift(HardwareMap hardwareMap) {
+            elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
+            elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
+
+            elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            elevator1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            elevator2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+
+        public void update() {
+
+            // Elapsed timer class from SDK, please use it, it's epic
+            ElapsedTime timer = new ElapsedTime();
+
+            // obtain the encoder position
+            encoderPosition = elevator1.getCurrentPosition();
+            // calculate the error
+            error = targetPos - encoderPosition;
+
+            // rate of change of the error
+            derivative = (error - lastError) / timer.seconds();
+
+            // sum of all error over time
+            integralSum = integralSum + (error * timer.seconds());
+
+            power = ((Kp * error) + (Ki * integralSum) + (Kd * derivative));
+
+            elevator1.setPower(power);
+            elevator2.setPower(power);
+
+            lastError = error;
+
+            // reset the timer for next time
+            timer.reset();
         }
     }
 }
