@@ -32,13 +32,21 @@ public class Left_Nala_3_Auto_FSM extends LinearOpMode {
     // This enum defines our "state"
     // This is essentially just defines the possible steps our program will take
     enum State {
-        TRAJECTORY_1,   // First, follow a splineTo() trajectory
-        TRAJECTORY_2,   // Then, follow a lineTo() trajectory
-        TURN_1,         // Then we want to do a point turn
-        TRAJECTORY_3,   // Then, we follow another lineTo() trajectory
-        WAIT_1,         // Then we're gonna wait a second
-        TURN_2,         // Finally, we're gonna turn again
-        IDLE            // Our bot will enter the IDLE state when done
+        TRAJECTORY_1,   // head to the first junction, elevator to low, swing to left
+        WAIT_1,         // time to score the preload
+        TRAJECTORY_2,   // drive to the cone stack row, swing to middle, elevator to topCone
+        TURN_1,         // turn 90 degrees to face the cone stack
+        TRAJECTORY_3,   // drive to the cone stack, grab cone and raise up
+        TRAJECTORY_4,   // back up to the tall junction, elevator to tall, swing right
+        WAIT_2,         // time to score cone
+        TRAJECTORY_5,   // drive to the cone stack, grab cone and raise up
+        TRAJECTORY_6,   // back up to the tall junction, elevator to tall, swing right
+        WAIT_3,         // time to score cone
+        TRAJECTORY_7,   // drive to the cone stack, grab cone and raise up
+        TRAJECTORY_8,   // back up to the tall junction, elevator to tall, swing right
+        WAIT_4,         // time to score cone
+        PARK,            //use the parkY variable to park in the correct zone
+        IDLE,            // enter the IDLE state when done
     }
 
     // We define the current state we're on
@@ -167,7 +175,9 @@ public class Left_Nala_3_Auto_FSM extends LinearOpMode {
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
         lights.setPattern(pattern);
 
-        // Let's define our trajectories
+        /*//////////////////////////////////
+        HERE'S OUR TRAJECTORY DEFINITIONS
+        //////////////////////////////////*/
         Trajectory trajectory1 = drive.trajectoryBuilder(startPose)
                 .splineTo(new Vector2d(x1, y1), Math.toRadians(0))
                 .addTemporalMarker(0, () -> {
@@ -209,6 +219,9 @@ public class Left_Nala_3_Auto_FSM extends LinearOpMode {
         double waitTime1 = 1.5;
         ElapsedTime waitTimer1 = new ElapsedTime();
 
+       /*//////////////////////////////////
+        END OF TRAJECTORY DEFINITIONS
+        //////////////////////////////////*/
 
 
         while (!isStarted() && !isStopRequested()) {
