@@ -205,6 +205,13 @@ public class teleoptest_v2 extends LinearOpMode {
 
     // our lift class allows us to update the elevator without interrupting the drive code
     class Lift {
+
+        double a = 0.8;
+        double previousFilterEstimate = 0;
+        double currentFilterEstimate = 0;
+        double errorChange;
+        double integralSum = 0;
+
         public Lift(HardwareMap hardwareMap) {
             elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
             elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
@@ -222,11 +229,17 @@ public class teleoptest_v2 extends LinearOpMode {
 
             // obtain the encoder position
             encoderPosition = elevator1.getCurrentPosition();
+
             // calculate the error
             error = targetPos - encoderPosition;
+            errorChange = (error - lastError);
+
+            currentFilterEstimate = (a * previousFilterEstimate) + (1-a) * errorChange;
+            previousFilterEstimate = currentFilterEstimate;
+
 
             // rate of change of the error
-            derivative = (error - lastError) / timer.seconds();
+            derivative = currentFilterEstimate / timer.seconds();
 
             // sum of all error over time
             integralSum = integralSum + (error * timer.seconds());

@@ -306,7 +306,7 @@ public class Left_Nala_3_Auto_FSM extends LinearOpMode {
                     // Check if the timer has exceeded the specified wait time
                     // If so, move on to the TURN_2 state
                     if (waitTimer1.seconds() >= waitTime1) {
-                        currentState = State.TURN_2;
+                       // currentState = State.TURN_2;
                         drive.turnAsync(turnAngle1);
                     }
                     break;
