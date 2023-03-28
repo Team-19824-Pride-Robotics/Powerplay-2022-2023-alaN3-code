@@ -13,19 +13,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
 @TeleOp
-public class PIDF_Test extends OpMode {
+public class mp_test extends OpMode {
 
-    private PIDController controller;
-
-    public static double p = .04, i= 0, d= 0.001;
-    public static double f = 0.1;
-
-    public static double newP = .003;
-    public static double newP2 = .03;
-
-    public static int target = 0;
-
-    private final double tick_in_degree = 384.5 / 180.0;
+    public static double start = 0;
+    public static double target = 1000;
+    public static double power = 0;
+    public static double distance = 0;
+    public static double seg = 0;
+    public static double current = 0;
 
     private DcMotorEx elevator1;
     private DcMotorEx elevator2;
@@ -33,7 +28,6 @@ public class PIDF_Test extends OpMode {
 
     @Override
     public void init() {
-        controller= new PIDController(p, i, d);
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
@@ -47,37 +41,46 @@ public class PIDF_Test extends OpMode {
     @Override
     public void loop() {
 
+    current = elevator1.getCurrentPosition();
+    seg = distance / 10;
 
-        controller.setPID(p, i, d);
-        int elevPos = elevator1.getCurrentPosition();
-        if ( target <= elevPos && elevPos > 500) {
-            p = newP;
-            f= 0;
+        if (current >= start && current < start + seg) {
+            power = .3;
         }
-        else if (target <= elevPos && elevPos > 30){
-            p = newP2;
-            f = 0;
+
+        else if (current >= start + seg && current < start + (seg * 2)) {
+            power = .6;
         }
+
+        else if (current >= start + (seg * 2) && current < start + (seg * 8)) {
+            power = 1;
+        }
+
+        else if (current >= start + (seg * 8) && current < start + (seg * 9)){
+            power = .6;
+        }
+
+        else if (current >= start + (seg * 9) && current < start + (seg * 10)) {
+            power = .3;
+        }
+
         else {
-            p = .04;
-            f = .1;
+            power = .15;
         }
-        double pid = controller.calculate(elevPos, target);
-        double ff = .1; //Math.cos(Math.toRadians(target / tick_in_degree)) * f;
 
-        double power = pid + ff;
 
 
         elevator1.setPower(power);
         elevator2.setPower(power);
 
 
-        telemetry.addData("pos", elevator1.getCurrentPosition());
+        telemetry.addData("pos", current);
         telemetry.addData("target", target);
         telemetry.addData("power", power);
-        telemetry.addData("p", p);
-        telemetry.addData("motorpower", elevator1.getPower());
-        telemetry.addData("motorpower", elevator2.getPower());
+        telemetry.addData("start", start);
+        telemetry.addData("power", seg);
+        telemetry.addData("motorpower1", elevator1.getPower());
+        telemetry.addData("motorpower2", elevator2.getPower());
 
         telemetry.update();
     }
