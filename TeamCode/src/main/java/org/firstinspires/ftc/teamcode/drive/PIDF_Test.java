@@ -30,6 +30,12 @@ public class PIDF_Test extends OpMode {
     private DcMotorEx elevator1;
     private DcMotorEx elevator2;
 
+    double pid;
+    double ff = .1; //Math.cos(Math.toRadians(target / tick_in_degree)) * f;
+
+    double power;
+    int elevPos;
+
 
     @Override
     public void init() {
@@ -39,6 +45,9 @@ public class PIDF_Test extends OpMode {
         elevator1 = hardwareMap.get(DcMotorEx.class, "elevator1");
         elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
         elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator1.setDirection(DcMotorSimple.Direction.REVERSE);
         elevator2.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -47,9 +56,10 @@ public class PIDF_Test extends OpMode {
     @Override
     public void loop() {
 
-
         controller.setPID(p, i, d);
-        int elevPos = elevator1.getCurrentPosition();
+
+        elevPos = elevator1.getCurrentPosition();
+
         if ( target <= elevPos && elevPos > 500) {
             p = newP;
             f= 0;
@@ -62,10 +72,9 @@ public class PIDF_Test extends OpMode {
             p = .04;
             f = .1;
         }
-        double pid = controller.calculate(elevPos, target);
-        double ff = .1; //Math.cos(Math.toRadians(target / tick_in_degree)) * f;
+        pid = controller.calculate(elevPos, target);
 
-        double power = pid + ff;
+        power = pid + ff;
 
 
         elevator1.setPower(power);
