@@ -5,20 +5,17 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gyroscope;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 
 @TeleOp(group = "drive")
 @Config
 public class TeleOp_Nala_3 extends LinearOpMode {
 
-    public static double elevator_strength = 1;
-    public static double elevator_down_strength = 0.7;
+    public static double elevator_strength = 2000;
+    public static double elevator_down_strength = 800;
     public static double speed = 1;
     public static double sr1o = 0.48;
     public static double sr1c = 0.7;
@@ -28,17 +25,8 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double top = -2030;
     public static double mid = -1400;
     public static double low = -850;
-    public static double ground = -100;
     public static double pickup = -30;
-    public static double x1 = 35.91;
-    public static double y1 = -28.22;
-    public static double x2 = .754;
-    public static double y2 = -23.276;
-    public static double h1 = 180;
-    public static double h2 = 180;
     public static double downToScore = 150;
-    public static double bumpUpElevator = 170;
-    public boolean ClawState = true;
     public static double pos = 0;
     int temp = 1;
 
@@ -51,12 +39,12 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
         //drive.setPoseEstimate(PoseStorage.currentPose);
 
-        DcMotor elevator;
-        Gyroscope imu;
+        DcMotorEx elevator;
         Servo servo1;
         Servo servo3;
 
-        elevator = hardwareMap.get(DcMotor.class, "elevator");
+        elevator = hardwareMap.get(DcMotorEx.class, "elevator");
+        elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         servo1 = hardwareMap.get(Servo.class, "servo1");
         servo3 = hardwareMap.get(Servo.class, "servo3");
         lights = hardwareMap.get(RevBlinkinLedDriver.class, "lights");
@@ -76,14 +64,14 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
             // telemetry
             Pose2d poseEstimate = drive.getPoseEstimate();
-            telemetry.addData("x", poseEstimate.getX());
-            telemetry.addData("y", poseEstimate.getY());
-            telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
-            telemetry.addData("Encoder elevator", elevator.getCurrentPosition());
-            telemetry.addData("claw1 pos",servo1.getPosition());
-            telemetry.addData("arm pos",servo3.getPosition());
-            telemetry.addData("Run time",getRuntime());
-            telemetry.addData("temp",temp);
+//            telemetry.addData("x", poseEstimate.getX());
+//            telemetry.addData("y", poseEstimate.getY());
+//            telemetry.addData("heading", Math.toDegrees(poseEstimate.getHeading()));
+            telemetry.addData("Elevator position: ", elevator.getCurrentPosition());
+//            telemetry.addData("claw1 pos",servo1.getPosition());
+//            telemetry.addData("arm pos",servo3.getPosition());
+//            telemetry.addData("Run time",getRuntime());
+//            telemetry.addData("temp",temp);
             telemetry.update();
 
             pos = elevator.getCurrentPosition();
@@ -170,41 +158,47 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) top);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                elevator.setVelocity(elevator_strength);
             }
+
             //elevator to middle junction level
             if (gamepad2.x) {
+
+                pos = elevator.getCurrentPosition();
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) mid);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                if(pos < mid) {
+                    elevator.setVelocity(elevator_down_strength);
+                }
+                else {
+                    elevator.setVelocity(elevator_strength);
+                }
             }
+
             //elevator to low junction level
             if (gamepad2.a) {
+
+                pos = elevator.getCurrentPosition();
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) low);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_strength);
+                if(pos < low) {
+                    elevator.setVelocity(elevator_down_strength);
+                }
+                else {
+                    elevator.setVelocity(elevator_strength);
+                }
             }
-
-            //turn off encoders and manually move elevator down
-//            if (gamepad2.b) {
-//                servo3.setPosition(am);
-//                servo1.setPosition(sr1c);
-//                elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//                if (gamepad2.left_stick_y > 0.5) {
-//                    elevator.setPower(gamepad2.left_stick_y * 0.5);
-//                }
-//            }
 
             // elevator to pickup level
             if (gamepad2.b) {
+                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 servo3.setPosition(am);
                 elevator.setTargetPosition((int) pickup);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elevator.setPower(elevator_down_strength);
+                elevator.setVelocity(elevator_down_strength);
             }
-
 
             //to move elevator manually, press left stick button to drop elevator and
             //right stick button to raise it
@@ -215,8 +209,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) score);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                elevator.setPower(elevator_strength);
+                elevator.setVelocity(elevator_strength);
 
             }
             if (gamepad2.right_stick_button) {
@@ -225,8 +218,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 elevator.setTargetPosition((int) score);
                 elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                //elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                elevator.setPower(elevator_down_strength);
+                elevator.setVelocity(elevator_down_strength);
 
             }
 
@@ -237,21 +229,6 @@ public class TeleOp_Nala_3 extends LinearOpMode {
                 elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             }
-
-
-
-//            if (gamepad2.b)  {
-//                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//                elevator.setTargetPosition((int) pos);
-//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                elevator.setPower(elevator_strength);
-//            }
-
-            //led control
-
-
-
-
         }
     }
 }
