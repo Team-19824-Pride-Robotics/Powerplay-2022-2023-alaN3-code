@@ -138,74 +138,19 @@ public class TeleOp_Nala_3 extends LinearOpMode {
 
             drive.update();
 
-
-
-            //////////////////////////////
-            //Semi-autonomous routines start here
-            //////////////////////////////
-
-
-      /*      if (gamepad1.a) {
-                TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                        .splineToConstantHeading(new Vector2d(x2, y2), Math.toRadians(h2))
-                        .addDisplacementMarker(1, () -> {
-                            servo3.setPosition(am);
-                            elevator.setTargetPosition((int) pickup);
-                            elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                            elevator.setPower(elevator_strength);
-
-                        })
-                        .build();
-                drive.followTrajectorySequenceAsync(trajSeq);
-            }
-
-        if (gamepad1.y) {
-            TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                    .splineToConstantHeading(new Vector2d(x1, y1), Math.toRadians(h1))
-                    .addDisplacementMarker(.1, () -> {
-                        servo3.setPosition(am);
-                        elevator.setTargetPosition((int) top);
-                        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        elevator.setPower(elevator_strength);
-
-                    })
-                    .build();
-            drive.followTrajectorySequenceAsync(trajSeq);
-        }
-
-            if (gamepad1.y) {
-                TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                        .back(36)
-                        .build();
-                drive.followTrajectorySequenceAsync(trajSeq);
-            }
-
-
-            if (gamepad1.a) {
-                TrajectorySequence trajSeq = drive.trajectorySequenceBuilder(drive.getPoseEstimate())
-                        .forward(36)
-                        .build();
-                drive.followTrajectorySequenceAsync(trajSeq);
-            }
-
-
-*/
             /*//////////////////////////
             DRIVER 2 CONTROLS START HERE
             *///////////////////////////
 
             //open claw
-            if(gamepad2.left_bumper /*&& ClawState == false*/) {
+            if(gamepad2.left_bumper) {
                 servo1.setPosition(sr1o);
-                //ClawState=true;
             }
 
             //close claw
-            if(gamepad2.right_bumper /*&& ClawState == true*/) {
+            if(gamepad2.right_bumper) {
                 servo1.setPosition(sr1c);
-                //ClawState=false;
             }
-
 
             //arm to left
             if (gamepad2.dpad_right) {
@@ -219,13 +164,7 @@ public class TeleOp_Nala_3 extends LinearOpMode {
             if (gamepad2.dpad_left) {
                 servo3.setPosition(ar);
             }
-            //elevator to ground terminal level
-//            if (gamepad2.dpad_down) {
-//                elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//                elevator.setTargetPosition((int) ground);
-//                elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                elevator.setPower(elevator_down_strength);
-//            }
+
             //elevator to high junction level
             if (gamepad2.y) {
                 elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
