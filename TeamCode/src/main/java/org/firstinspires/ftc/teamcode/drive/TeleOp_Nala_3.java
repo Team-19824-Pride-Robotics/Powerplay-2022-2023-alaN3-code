@@ -14,18 +14,18 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class TeleOp_Nala_3 extends LinearOpMode {
 
-    public static double elevator_strength = 2000;
-    public static double elevator_down_strength = 800;
+    public static double elevator_strength = 2200;
+    public static double elevator_down_strength = 1600;
     public static double speed = 1;
     public static double sr1o = 0.48;
     public static double sr1c = 0.7;
     public static double al = .06;
     public static double am = 0.40;
     public static double ar = .72;
-    public static double top = -2030;
+    public static double top = -2000;
     public static double mid = -1400;
     public static double low = -850;
-    public static double pickup = -30;
+    public static double pickup = -60;
     public static double downToScore = 150;
     public static double pos = 0;
     int temp = 1;
