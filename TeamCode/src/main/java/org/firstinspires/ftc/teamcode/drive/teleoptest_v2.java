@@ -54,7 +54,7 @@ public class teleoptest_v2 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         //initialize our drive
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        drive.setPoseEstimate(PoseStorage.currentPose);
+       // drive.setPoseEstimate(PoseStorage.currentPose);
 
         // Initialize our lift
         Lift lift = new Lift(hardwareMap);

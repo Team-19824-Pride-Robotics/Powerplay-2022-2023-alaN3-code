@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.util.Range;
 
 
 
-
+@Disabled
 @TeleOp(group="Drive")
 @Config
 public class PID_Test extends LinearOpMode {

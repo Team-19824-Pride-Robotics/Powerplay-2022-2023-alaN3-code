@@ -73,7 +73,7 @@ public class TeleOp_alan_v5 extends LinearOpMode {
        // elevator1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // elevator2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        drive.setPoseEstimate(PoseStorage.currentPose);
+        //drive.setPoseEstimate(PoseStorage.currentPose);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         servo1 = hardwareMap.get(Servo.class, "servo1");

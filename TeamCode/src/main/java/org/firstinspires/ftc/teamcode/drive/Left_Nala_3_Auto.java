@@ -31,7 +31,8 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double armMiddle = .40;
     public static int topCone = 300;
     public static int secondCone = 240;
-    public static int thirdcone = 140;
+    public static int thirdcone = 180;
+    public static int lastcone = 100;
     public static double parkY = -17;
     public static double elevator_strength = 1;
     public static double elevator_down_strength = .7;
@@ -53,7 +54,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
     public static double y2 = -3;
     //cone stack location
     public static double x3 = 50.75;
-    public static double y3 = 25.5;
+    public static double y3 = 25.9;
     //backup to score
     public static double x4 = 51;
     public static double y4 = -7.8;
@@ -194,7 +195,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(0.25, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(.20, () -> {
                         servo3.setPosition(armMiddle);
                     })
 
@@ -355,7 +356,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
 
                     //lower the elevator to "second cone" position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(thirdcone);
+                        elevator.setTargetPosition(lastcone);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_down_strength);
                     })
@@ -417,7 +418,7 @@ public class Left_Nala_3_Auto extends LinearOpMode {
                 drive.followTrajectorySequence(trajSeq);
             }
 
-            PoseStorage.currentPose = drive.getPoseEstimate();
+//            PoseStorage.currentPose = drive.getPoseEstimate();
 
 
 

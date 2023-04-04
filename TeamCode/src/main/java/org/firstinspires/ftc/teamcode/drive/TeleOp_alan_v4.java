@@ -62,7 +62,7 @@ public class TeleOp_alan_v4 extends OpMode {
 
         controller = new PIDController(p, i, d);
 
-        drive.setPoseEstimate(PoseStorage.currentPose);
+//        drive.setPoseEstimate(PoseStorage.currentPose);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         servo1 = hardwareMap.get(Servo.class, "servo1");

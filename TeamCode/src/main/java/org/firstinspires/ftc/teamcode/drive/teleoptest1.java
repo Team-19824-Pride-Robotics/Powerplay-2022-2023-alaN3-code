@@ -54,7 +54,7 @@ public class teleoptest1 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(PoseStorage.currentPose);
+     //   drive.setPoseEstimate(PoseStorage.currentPose);
 
         Gyroscope imu;
         Servo servo1;

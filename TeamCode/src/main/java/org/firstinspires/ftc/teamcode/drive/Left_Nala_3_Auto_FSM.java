@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 @Config
 @Autonomous(name="Left_Nala_3_Auto_FSM")
 
-//@Disabled
+@Disabled
 public class Left_Nala_3_Auto_FSM extends LinearOpMode {
 
     // This enum defines our "state"
@@ -325,7 +326,7 @@ public class Left_Nala_3_Auto_FSM extends LinearOpMode {
             Pose2d poseEstimate = drive.getPoseEstimate();
 
             // Continually write pose to `PoseStorage`
-            PoseStorage.currentPose = poseEstimate;
+            //PoseStorage.currentPose = poseEstimate;
 
         }
     }
