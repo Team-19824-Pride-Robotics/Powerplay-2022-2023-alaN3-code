@@ -53,7 +53,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static double y2 = -1;
     //cone stack location
     public static double x3 = 49.85;
-    public static double y3 = -26.6;
+    public static double y3 = -26.5;
     //backup to score
     public static double x4 = 49.4;
     public static double y4 = 7.2;
