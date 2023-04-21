@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.drive.advanced.PoseStorage;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -20,10 +19,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-@Autonomous(name="Right_Nala_3_Auto")
+@Autonomous(name="auto_right_no_middle_ALT")
 
 //@Disabled
-public class Right_Nala_3_Auto extends LinearOpMode {
+public class auto_right_no_middle_ALT extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -44,32 +43,34 @@ public class Right_Nala_3_Auto extends LinearOpMode {
     public static int low = 850;
     public static int pickup = 20;
 
-    public static double turn = -94;
+    public static double turn = -92;
     // to first pole
-    public static double x1 = 42;
-    public static double y1 = -1.5;
+    public static double x1 = 11;
+    public static double y1 = -1;
     //move up to line up for pickup
-    public static double x2 = 48.8;
+    public static double x2 = 40;
     public static double y2 = -1;
     //cone stack location
-    public static double x3 = 49;
-    public static double y3 = -26.5;
+    public static double x3 = 48.8;
+    public static double y3 = -26.3;
     //backup to score
-    public static double x4 = 48.8;
-    public static double y4 = 6.8;
+    public static double x4 = 52.2;
+    public static double y4 = 7.2;
     // score second cone on high
-    public static double x5 = 48.8;
-    public static double y5 = 7;
+    public static double x5 = 52;
+    public static double y5 = 7.4;
     //score last cone on high
-    public static double x6 = 49;
-    public static double y6 = 7;
+    public static double x6 = 52;
+    public static double y6 = 7.4;
     //push cone out the way
-    public static double x7 = 60;
-    public static double y7 = -2;
+    public static double x7 = 18;
+    public static double y7 = 0;
 
+    public static double x8 = 50;
+    public static double y8 = -4;
 
     //claw
-    public static double sr1c = .68;
+    public static double sr1c = .72;
     public static double sr1o = .48;
 
     //april tag qr id
@@ -226,7 +227,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                     })
 
                     .UNSTABLE_addTemporalMarkerOffset(.3, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -240,7 +241,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(al);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -274,7 +275,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -288,7 +289,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(al);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -321,7 +322,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -335,7 +336,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(al);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -367,7 +368,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                         servo1.setPosition(sr1c);
                     })
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
-                        elevator.setTargetPosition(top);
+                        elevator.setTargetPosition(mid);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
                     })
@@ -381,7 +382,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
 
                     //swing the arm to the right while driving
                     .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
-                        servo3.setPosition(al);
+                        servo3.setPosition(ar);
                     })
 
                     //time for the arm to stop swinging
@@ -413,7 +414,7 @@ public class Right_Nala_3_Auto extends LinearOpMode {
                 drive.followTrajectorySequence(trajSeq);
             }
 
-          //  PoseStorage.currentPose = drive.getPoseEstimate();
+         //   PoseStorage.currentPose = drive.getPoseEstimate();
 
 
 

@@ -53,16 +53,16 @@ public class Left_Nala_3_Auto_ALT extends LinearOpMode {
     public static double y2 = -.5;
     //cone stack location
     public static double x3 = 50.5;
-    public static double y3 = 25.9;
+    public static double y3 = 25.4;
     //backup to score
     public static double x4 = 52.6;
-    public static double y4 = -7.8;
+    public static double y4 = -8;
     // score second cone on high
     public static double x5 = 52.6;
-    public static double y5 = -7.8;
+    public static double y5 = -8;
     //score last cone on high
     public static double x6 = 52.6;
-    public static double y6 = -7.8;
+    public static double y6 = -8.2;
     //push cone out the way
     public static double x7 = 60;
     public static double y7 = -1.25;

@@ -44,24 +44,24 @@ public class Right_Nala_3_Auto_ALT extends LinearOpMode {
     public static int low = 850;
     public static int pickup = 20;
 
-    public static double turn = -91;
+    public static double turn = -92;
     // to first pole
-    public static double x1 = 43;
+    public static double x1 = 42;
     public static double y1 = -1;
     //move up to line up for pickup
     public static double x2 = 50;
     public static double y2 = -1;
     //cone stack location
-    public static double x3 = 49.2;
-    public static double y3 = -26.5;
+    public static double x3 = 48.8;
+    public static double y3 = -26.3;
     //backup to score
-    public static double x4 = 53.2;
+    public static double x4 = 52.2;
     public static double y4 = 7.2;
     // score second cone on high
-    public static double x5 = 53.4;
+    public static double x5 = 52;
     public static double y5 = 7.4;
     //score last cone on high
-    public static double x6 = 53.6;
+    public static double x6 = 52;
     public static double y6 = 7.4;
     //push cone out the way
     public static double x7 = 60;

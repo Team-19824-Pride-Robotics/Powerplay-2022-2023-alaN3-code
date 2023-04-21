@@ -29,7 +29,6 @@ public class encoder extends LinearOpMode {
 
 
 
-
         waitForStart();
 
         while (!isStopRequested()) {
