@@ -46,7 +46,7 @@ public class auto_right_no_middle extends LinearOpMode {
     public static double turn = -94;
     // to first pole
     public static double x1 = 11;
-    public static double y1 = -1.5;
+    public static double y1 = 0;
     //move up to line up for pickup
     public static double x2 = 40;
     public static double y2 = 0;
@@ -201,7 +201,7 @@ public class auto_right_no_middle extends LinearOpMode {
                     })
 
                     //time to score and then swing the arm back
-                    .waitSeconds(.25)
+                    .waitSeconds(.5)
 
                     //lower the elevator to "top cone" position
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
@@ -217,13 +217,13 @@ public class auto_right_no_middle extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1c);
                     })
-                    .waitSeconds(.25)
-                    .UNSTABLE_addTemporalMarkerOffset(0, () -> {
+                    .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(0)))
+                    .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
                         elevator.setTargetPosition(low);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_down_strength);
                     })
-                    .waitSeconds(.2)
+                    .waitSeconds(.3)
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo3.setPosition(ar);
                     })
@@ -231,7 +231,6 @@ public class auto_right_no_middle extends LinearOpMode {
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                         servo1.setPosition(sr1o);
                     })
-                    .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(0)))
                     .lineToLinearHeading(new Pose2d(x8,y8, Math.toRadians(turn)))
 
                     .UNSTABLE_addTemporalMarkerOffset(-.5, () -> {

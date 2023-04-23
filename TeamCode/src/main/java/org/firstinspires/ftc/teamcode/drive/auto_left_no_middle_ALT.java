@@ -49,7 +49,7 @@ public class auto_left_no_middle_ALT extends LinearOpMode {
     public static double x1 = 11;
     public static double y1 = -.5;
     //move up to line up for pickup
-    public static double x2 = 40;
+    public static double x2 = 48;
     public static double y2 = 0;
     //cone stack location
     public static double x3 = 50.5;
@@ -67,8 +67,8 @@ public class auto_left_no_middle_ALT extends LinearOpMode {
     public static double x7 = 18;
     public static double y7 = 0;
 
-    public static double x8 = 50;
-    public static double y8 = 4;
+    public static double x8 = 52;
+    public static double y8 = -2;
 
     //claw
     public static double sr1c = .72;
@@ -234,10 +234,10 @@ public class auto_left_no_middle_ALT extends LinearOpMode {
                     .lineToLinearHeading(new Pose2d(x2,y2, Math.toRadians(0)))
                     .lineToLinearHeading(new Pose2d(x8,y8, Math.toRadians(turn)))
 
-                    .UNSTABLE_addTemporalMarkerOffset(-.5, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-1, () -> {
                         servo3.setPosition(armMiddle);
                     })
-                    .UNSTABLE_addTemporalMarkerOffset(-.4, () -> {
+                    .UNSTABLE_addTemporalMarkerOffset(-.5, () -> {
                         elevator.setTargetPosition(topCone);
                         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         elevator.setPower(elevator_strength);
@@ -414,7 +414,7 @@ public class auto_left_no_middle_ALT extends LinearOpMode {
                     })
 
                     //time for the arm to stop swinging
-                    .waitSeconds(.15)
+                    .waitSeconds(.05)
 
                     //open claw and swing arm back to middle
                     .UNSTABLE_addTemporalMarkerOffset(0, () -> {
