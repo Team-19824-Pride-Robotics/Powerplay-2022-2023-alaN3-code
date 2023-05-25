@@ -19,9 +19,9 @@ public class TeleOp_Nala_3 extends LinearOpMode {
     public static double speed = 1;
     public static double sr1o = 0.48;
     public static double sr1c = 0.7;
-    public static double al = .06;
+    public static double al = .07;
     public static double am = 0.40;
-    public static double ar = .72;
+    public static double ar = .75;
     public static double top = -2000;
     public static double mid = -1400;
     public static double low = -850;
